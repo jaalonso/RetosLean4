@@ -1,4 +1,4 @@
-#+TITLE: Notas del directorio LeanWeb
+#+TITLE: Notas del directorio Lean4Web
 
 - Este directorio contiene los retos expandidos (es decir sin
-  importaciones de otros retos) para que se puedan compilar en Lean Web.
+  importaciones de otros retos) para que se puedan compilar en [[https://live.lean-lang.org/][Lean 4 Web]].
