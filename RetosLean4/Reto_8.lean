@@ -131,9 +131,11 @@ by
 -- Lemas usados
 -- ============
 
+/-
 variable (a b c d : ℝ)
 
 #check (abs_add_le a b : |a + b| ≤ |a| + |b|)
 #check (add_lt_add : a < b → c < d → a + c < b + d)
 #check (lt_irrefl a : ¬a < a)
 #check (sub_add_cancel a b : (a - b) + b = a)
+-/

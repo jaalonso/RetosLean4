@@ -1,5 +1,5 @@
-name = "Retos"
-defaultTargets = ["Retos"]
+name = "RetosLean4"
+defaultTargets = ["RetosLean4"]
 
 [[require]]
 name = "mathlib"
@@ -7,6 +7,6 @@ scope = "leanprover-community"
 rev = "v4.34.1"
 
 [[lean_lib]]
-name = "Retos"
+name = "RetosLean4"
 srcDir = "."
 globs = ["RetosLean4.+"]

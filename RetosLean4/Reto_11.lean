@@ -158,5 +158,7 @@ by
 -- Lemas usados
 -- ============
 
+/-
 variable (x y : ℝ)
 #check (abs_abs_sub_abs_le x y : |(|x|) - (|y|)| ≤ |x - y|)
+-/

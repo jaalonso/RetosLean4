@@ -170,6 +170,7 @@ by
 -- Lemas usados
 -- ============
 
+/-
 variable (a b c d : ℝ)
 variable (f : ℝ → ℝ)
 #check (abs_add_le a b : |a + b| ≤ |a| + |b|)
@@ -180,3 +181,4 @@ variable (f : ℝ → ℝ)
 #check (congrArg f : a = b → f a = f b)
 #check (half_pos : 0 < a → 0 < a / 2)
 #check (sub_add_sub_cancel a b c : (a - b) + (b - c) = a - c)
+-/

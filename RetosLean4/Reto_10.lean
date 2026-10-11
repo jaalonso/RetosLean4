@@ -164,6 +164,7 @@ by
 -- Lemas usados
 -- ============
 
+/-
 variable (x y z : ℝ)
 #check (abs_add_le x y : |x + y| ≤ |x| + |y|)
 #check (abs_neg x : |(-x)| = |x|)
@@ -173,3 +174,4 @@ variable (x y z : ℝ)
 #check (neg_sub x y : -(x - y) = y - x)
 #check (sub_half x : x - x / 2 = x / 2)
 #check (tsub_le_iff_right : x - y ≤ z ↔ x ≤ z + y)
+-/

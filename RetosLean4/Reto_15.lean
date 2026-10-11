@@ -297,6 +297,7 @@ end Solucion4
 -- Lemas usados
 -- ============
 
+/-
 variable (n m k : ℕ)
 #check (Nat.add_le_add_iff_left : n + m ≤ n + k ↔ m ≤ k)
 #check (Nat.add_le_add_left : n ≤ m → ∀ k, k + n ≤ k + m)
@@ -308,3 +309,4 @@ variable (n m k : ℕ)
 #check (Nat.pow_two n : n ^ 2 = n * n)
 #check (Nat.succ_add n m : n.succ + m = (n + m).succ)
 #check (Nat.two_mul n : 2 * n = n + n)
+-/

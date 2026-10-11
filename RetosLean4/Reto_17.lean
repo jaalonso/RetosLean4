@@ -197,7 +197,7 @@ by
 -- 8ª demostración
 -- ---------------
 
-lemma L1
+lemma Reto17_L1
   (h : LimSuc a L)
   : ∃ k, ∀ n ≥ k, |a n| < |L| + 1 :=
   (h 1 one_pos).imp fun _k hk n hn =>
@@ -379,7 +379,7 @@ by
 -- 8ª demostración
 -- ---------------
 
-lemma L2
+lemma Reto17_L2
   (k : ℕ)
   : ∃ M, ∀ i < k, |a i| ≤ M :=
   ⟨∑ i ∈ range k, |a i|,
@@ -397,10 +397,10 @@ by
   obtain ⟨L, hL⟩ := ha
   -- L : ℝ
   -- hL : LimSuc a L
-  obtain ⟨k, hk⟩ := L1 a hL
+  obtain ⟨k, hk⟩ := Reto17_L1 a hL
   -- k : ℕ
   -- hk : ∀ n ≥ k, |a n| < |L| + 1
-  obtain ⟨C, hC⟩ := L2 a k
+  obtain ⟨C, hC⟩ := Reto17_L2 a k
   -- C : ℝ
   -- hC : ∀ i < k, |a i| ≤ C
   set M := max (|L| + 1) C with hM
@@ -423,6 +423,7 @@ by
 -- Lemas usados
 -- ============
 
+/-
 variable (n m : ℕ)
 variable (x y z : ℝ)
 variable (f : ℝ → ℝ)
@@ -438,3 +439,4 @@ variable (s : Finset ℕ)
 #check (le_of_lt : x < y → x ≤ y)
 #check (mem_range : m ∈ range n ↔ m < n)
 #check (single_le_sum : (∀ i ∈ s, 0 ≤ a i) → ∀ i : ℕ, i ∈ s → a i ≤ ∑ x ∈ s, a x)
+-/

@@ -441,6 +441,7 @@ end Demostracion10
 -- Lemas usados
 -- ============
 
+/-
 variable (a b c m k : ℕ)
 #check (Dvd.dvd.add : m ∣ n → m ∣ k → m ∣ n + k)
 #check (Dvd.dvd.mul_left : m ∣ n → ∀ k, m ∣ k * n)
@@ -466,3 +467,4 @@ variable (a b c m k : ℕ)
 #check (pow_add a m n : a ^ (m + n) = a ^ m * a ^ n)
 #check (pow_mul m n k : m ^ (n * k) = (m ^ n) ^ k)
 #check (right_distrib n m k : (n + m) * k = n * k + m * k)
+-/

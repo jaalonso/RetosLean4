@@ -182,4 +182,6 @@ Injective.comp hg hf
 -- Lemas usados
 -- ============
 
+/-
 #check (Injective.comp : Injective g → Injective f → Injective (g ∘ f))
+-/

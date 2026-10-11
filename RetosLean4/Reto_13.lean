@@ -131,6 +131,7 @@ abs_abs_sub_abs_le x y
 -- Lemas usados
 -- ============
 
+/-
 variable (f : ℝ → ℝ)
 #check (abs_abs_sub_abs_le x y : |(|x| - |y|)| ≤ |x - y|)
 #check (abs_add_le x y : |x + y| ≤ |x| + |y|)
@@ -143,3 +144,4 @@ variable (f : ℝ → ℝ)
 #check (sub_add_cancel x y: (x - y) + y = x)
 #check (sub_le_sub_right : x ≤ y → ∀ z, x - z ≤ y - z)
 #check (sub_sub_self x y : x - (x - y) = y)
+-/

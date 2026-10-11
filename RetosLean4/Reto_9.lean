@@ -178,6 +178,7 @@ by
 -- Lemas usados
 -- ============
 
+/-
 namespace Lemas
 
 variable (a b c d : ℝ)
@@ -197,3 +198,4 @@ variable (f : ℝ → ℝ)
 #check (sub_self a : a - a = 0)
 
 end Lemas
+-/

@@ -66,18 +66,18 @@ example (n : ℕ) : ∃ p, n ≤ p ∧ Nat.Prime p := by
 -- 2ª demostración
 -- ===============
 
-lemma L1 (n : ℕ) : n ! + 1 ≠ 1 :=
+lemma Reto4_L1 (n : ℕ) : n ! + 1 ≠ 1 :=
   Nat.ne_of_gt (succ_lt_succ (factorial_pos n))
 
-lemma L2 (n : ℕ) : Nat.Prime (minFac (n ! + 1)) :=
-  minFac_prime (L1 n)
+lemma Reto4_L2 (n : ℕ) : Nat.Prime (minFac (n ! + 1)) :=
+  minFac_prime (Reto4_L1 n)
 
-lemma L3 (n : ℕ) : n ≤ minFac (n ! + 1) :=
+lemma Reto4_L3 (n : ℕ) : n ≤ minFac (n ! + 1) :=
 by
   by_contra h1
   -- h1 : ¬n ≤ minFac (n ! + 1)
   -- ⊢ False
-  apply Nat.Prime.not_dvd_one (L2 n)
+  apply Nat.Prime.not_dvd_one (Reto4_L2 n)
   -- ⊢ (n ! + 1).minFac ∣ 1
   have h2 : minFac (n ! + 1) ∣ n ! :=
     dvd_factorial (minFac_pos _) (le_of_not_ge h1)
@@ -87,7 +87,7 @@ example (n : ℕ) : ∃ p, n ≤ p ∧ Nat.Prime p :=
 by
   use minFac (n ! + 1)
   -- ⊢ n ≤ (n ! + 1).minFac ∧ Nat.Prime (n ! + 1).minFac
-  exact ⟨L3 n, L2 n⟩
+  exact ⟨Reto4_L3 n, Reto4_L2 n⟩
 
 -- 3ª demostración
 -- ===============
@@ -98,6 +98,7 @@ exists_infinite_primes n
 -- Lemas usados
 -- ============
 
+/-
 variable (k m n : ℕ)
 #check (Nat.Prime.not_dvd_one : Nat.Prime n → ¬n ∣ 1)
 #check (Nat.dvd_add_iff_right : k ∣ m → (k ∣ n ↔ k ∣ m + n))
@@ -111,3 +112,4 @@ variable (k m n : ℕ)
 #check (minFac_pos n : 0 < minFac n)
 #check (minFac_prime : n ≠ 1 → Nat.Prime (minFac n))
 #check (succ_lt_succ : n < m → n + 1 < m + 1)
+-/

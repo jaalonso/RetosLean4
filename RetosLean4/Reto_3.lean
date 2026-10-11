@@ -144,6 +144,7 @@ by
 -- Lemas usados
 -- ============
 
+/-
 variable (x y z : ℝ)
 
 #check (abs_lt :|x| < y ↔ -y < x ∧ x < y)
@@ -156,3 +157,4 @@ variable (x y z : ℝ)
 #check (mul_sub x y z : x * (y - z) = x * y - x * z)
 #check (two_ne_zero : 2 ≠ 0)
 #check (zero_lt_two : 0 < 2)
+-/
