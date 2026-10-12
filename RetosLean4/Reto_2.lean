@@ -1,13 +1,13 @@
 -- Reto_2.lean
 -- Soluciones de 2º reto (17 de mayo de 2026).
--- La sucesión 1, -1, 1, -1,... no esconvergente.
+-- La sucesión 1, -1, 1, -1,... no es convergente.
 -- ---------------------------------------------------------------------
 
 -- ---------------------------------------------------------------------
 -- En el reto de esta semana continuamos explorando la convergencia de
 -- sucesiones, retomando el trabajo de la semana anterior. El problema
--- consiste en demostrar que la sucesión definida por 1, -1, 1, -1,,,,
--- no converge. Para ello, se propone completar la siguiente
+-- consiste en demostrar que la sucesión definida por 1, -1, 1, -1, ...
+-- no es convergente. Para ello, se propone completar la siguiente
 -- demostración en Lean 4:
 --    import Mathlib.Data.Real.Basic
 --    import Mathlib.Tactic

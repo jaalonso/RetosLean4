@@ -8,9 +8,6 @@
 -- una sucesión tiene dos subsucesiones con límites distintos,
 -- entonces la sucesión no es convergente. Para ello, completar la
 -- siguiente teoría:
---    import Mathlib.Data.Real.Basic
---    import Mathlib.Tactic
---
 --    -- a converge a L
 --    def LimSuc (a : ℕ → ℝ) (L : ℝ) : Prop :=
 --      ∀ ε > 0, ∃ k : ℕ, ∀ n ≥ k, |a n - L| < ε
@@ -40,7 +37,28 @@
 --    by sorry
 -- ---------------------------------------------------------------
 
-import Mathlib.Basic.Real.Basic
+-- Demostración en lenguaje natural
+-- ================================
+
+-- La demostración se hará usando dos lemas demostrados en retos
+-- anteriores:
+-- + El lema limite_subsucesion (del Reto 21): toda subsucesión de
+--   una sucesión convergente converge al mismo límite que la
+--   sucesión.
+-- + El lema unicidad_limite (del Reto 9): si una sucesión aₙ
+--   converge tanto a L como a M, entonces L = M.
+--
+-- Para la demostración del reto, supongamos que la sucesión a es
+-- convergente. Entonces, por el lema limite_subsucesion se tiene
+-- que b₁ converge a L y, por el lema unicidad_limite se tiene que
+--    L₁ = L
+-- Análogamente se tiene que
+--    L₂ = L
+-- Por tanto L₁ = L₂ en contradicción con la hipótesis L₁ ≠ L₂.
+
+-- Demostraciones en Lean 4
+-- ========================
+
 import Mathlib.Tactic
 import RetosLean4.Defs -- LimSuc, SucConvergente, extraccion, subsucesion
 import RetosLean4.Reto_9 -- unicidad_limite
@@ -49,7 +67,10 @@ import RetosLean4.Reto_21 -- limite_subsucesion
 variable {a b₁ b₂ : ℕ → ℝ}
 variable {L L₁ L₂ M : ℝ}
 
-theorem CS_no_convergencia
+-- 1ª demostración
+-- ===============
+
+example
   (hb₁ : subsucesion b₁ a)
   (hL₁ : LimSuc b₁ L₁)
   (hb₂ : subsucesion b₂ a)
@@ -60,13 +81,49 @@ by
   intro h1
   -- h1 : SucConvergente a
   -- ⊢ False
-  apply h
-  -- ⊢ L₁ = L₂
   obtain ⟨L, hL⟩ := h1
   -- L : ℝ
-  -- hL : LimSac u L
+  -- hL : LimSuc a L
+  apply h
+  -- ⊢ L₁ = L₂
   have h2 : LimSuc b₁ L := limite_subsucesion hb₁ hL
   have h3 : LimSuc b₂ L := limite_subsucesion hb₂ hL
-  calc L₁
-       = L  := unicidad_limite hL₁ h2
-     _ = L₂ := unicidad_limite h3 hL₂
+  calc L₁ = L  := unicidad_limite hL₁ h2
+       _  = L₂ := unicidad_limite h3 hL₂
+
+-- 2ª demostración
+-- ===============
+
+example
+  (hb₁ : subsucesion b₁ a)
+  (hL₁ : LimSuc b₁ L₁)
+  (hb₂ : subsucesion b₂ a)
+  (hL₂ : LimSuc b₂ L₂)
+  (h : L₁ ≠ L₂)
+  : ¬SucConvergente a :=
+by
+  rintro ⟨L, hL⟩
+  -- L : ℝ
+  -- hL : LimSuc a L
+  -- ⊢ False
+  exact h (Eq.trans
+           (unicidad_limite hL₁ (limite_subsucesion hb₁ hL))
+           (unicidad_limite (limite_subsucesion hb₂ hL) hL₂))
+
+-- 3ª demostración
+-- ===============
+
+theorem CS_no_convergencia
+  (hb₁ : subsucesion b₁ a)
+  (hL₁ : LimSuc b₁ L₁)
+  (hb₂ : subsucesion b₂ a)
+  (hL₂ : LimSuc b₂ L₂)
+  (h : L₁ ≠ L₂)
+  : ¬SucConvergente a :=
+by
+  rintro ⟨L, hL⟩
+  -- L : ℝ
+  -- hL : LimSuc a L
+  -- ⊢ False
+  exact h ((unicidad_limite hL₁ (limite_subsucesion hb₁ hL)).trans
+           (unicidad_limite (limite_subsucesion hb₂ hL) hL₂))
