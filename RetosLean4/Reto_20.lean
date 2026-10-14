@@ -41,7 +41,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc, CotaSup
+import RetosLean4.Defs -- SeqLim, IsUB
 
 variable {a : ℕ → ℝ}
 variable {L M : ℝ}
@@ -50,8 +50,8 @@ variable {L M : ℝ}
 -- ===========
 
 example
-  (ha : LimSuc a L)
-  (hM : CotaSup a M)
+  (ha : SeqLim a L)
+  (hM : IsUB a M)
   : L ≤ M :=
 by
   by_contra hL
@@ -70,8 +70,8 @@ by
 -- ===========
 
 example
-  (ha : LimSuc a L)
-  (hM : CotaSup a M)
+  (ha : SeqLim a L)
+  (hM : IsUB a M)
   : L ≤ M :=
 by
   by_contra hL
@@ -95,8 +95,8 @@ by
 -- ===========
 
 example
-  (ha : LimSuc a L)
-  (hM : CotaSup a M)
+  (ha : SeqLim a L)
+  (hM : IsUB a M)
   : L ≤ M :=
 by
   by_contra hL
@@ -124,8 +124,8 @@ by
 -- ===========
 
 example
-  (ha : LimSuc a L)
-  (hM : CotaSup a M)
+  (ha : SeqLim a L)
+  (hM : IsUB a M)
   : L ≤ M :=
 by
   by_contra hL

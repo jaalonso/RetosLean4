@@ -70,7 +70,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc, SucConvergente, SucAcotada
+import RetosLean4.Defs -- SeqLim, SeqConv, SeqBdd
 
 open Finset
 
@@ -83,7 +83,7 @@ variable (a : ℕ → ℝ)
 -- ---------------
 
 example
-  (h : LimSuc a L)
+  (h : SeqLim a L)
   : ∃ k, ∀ n ≥ k, |a n| < |L| + 1 :=
 by
   obtain ⟨k, hk⟩ := h 1 one_pos
@@ -97,7 +97,7 @@ by
 -- ---------------
 
 example
-  (h : LimSuc a L)
+  (h : SeqLim a L)
   : ∃ k, ∀ n ≥ k, |a n| < |L| + 1 :=
 by
   obtain ⟨k, hk⟩ := h 1 one_pos
@@ -115,7 +115,7 @@ by
 -- ---------------
 
 example
-  (h : LimSuc a L)
+  (h : SeqLim a L)
   : ∃ k, ∀ n ≥ k, |a n| < |L| + 1 :=
 by
   obtain ⟨k, hk⟩ := h 1 one_pos
@@ -127,7 +127,7 @@ by
 -- ---------------
 
 example
-  (h : LimSuc a L)
+  (h : SeqLim a L)
   : ∃ k, ∀ n ≥ k, |a n| < |L| + 1 :=
 (h 1 one_pos).imp fun _ _ _ _ => by grind
 
@@ -135,7 +135,7 @@ example
 -- ---------------
 
 example
-  (h : LimSuc a L)
+  (h : SeqLim a L)
   : ∃ k, ∀ n ≥ k, |a n| < |L| + 1 :=
 by
   obtain ⟨k, hk⟩ := h 1 one_pos
@@ -156,7 +156,7 @@ by
 -- ---------------
 
 example
-  (h : LimSuc a L)
+  (h : SeqLim a L)
   : ∃ k, ∀ n ≥ k, |a n| < |L| + 1 :=
 by
   obtain ⟨k, hk⟩ := h 1 one_pos
@@ -177,7 +177,7 @@ by
 -- ---------------
 
 example
-  (h : LimSuc a L)
+  (h : SeqLim a L)
   : ∃ k, ∀ n ≥ k, |a n| < |L| + 1 :=
 by
   obtain ⟨k, hk⟩ := h 1 one_pos
@@ -197,8 +197,8 @@ by
 -- 8ª demostración
 -- ---------------
 
-lemma Reto17_L1
-  (h : LimSuc a L)
+lemma Challenge17_L1
+  (h : SeqLim a L)
   : ∃ k, ∀ n ≥ k, |a n| < |L| + 1 :=
   (h 1 one_pos).imp fun _k hk n hn =>
     -- _k : ℕ
@@ -379,7 +379,7 @@ by
 -- 8ª demostración
 -- ---------------
 
-lemma Reto17_L2
+lemma Challenge17_L2
   (k : ℕ)
   : ∃ M, ∀ i < k, |a i| ≤ M :=
   ⟨∑ i ∈ range k, |a i|,
@@ -391,16 +391,16 @@ lemma Reto17_L2
 -- ============================
 
 example
-  (ha : SucConvergente a) :
-  SucAcotada a :=
+  (ha : SeqConv a) :
+  SeqBdd a :=
 by
   obtain ⟨L, hL⟩ := ha
   -- L : ℝ
-  -- hL : LimSuc a L
-  obtain ⟨k, hk⟩ := Reto17_L1 a hL
+  -- hL : SeqLim a L
+  obtain ⟨k, hk⟩ := Challenge17_L1 a hL
   -- k : ℕ
   -- hk : ∀ n ≥ k, |a n| < |L| + 1
-  obtain ⟨C, hC⟩ := Reto17_L2 a k
+  obtain ⟨C, hC⟩ := Challenge17_L2 a k
   -- C : ℝ
   -- hC : ∀ i < k, |a i| ≤ C
   set M := max (|L| + 1) C with hM

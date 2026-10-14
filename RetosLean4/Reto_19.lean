@@ -34,7 +34,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc, SucConvergente, SucCauchy
+import RetosLean4.Defs -- SeqLim, SeqConv, IsCauchy
 
 variable {u : ℕ → ℝ}
 
@@ -42,8 +42,8 @@ variable {u : ℕ → ℝ}
 -- ===============
 
 example
-  (h : SucConvergente u)
-  : SucCauchy u :=
+  (h : SeqConv u)
+  : IsCauchy u :=
 by
   intros ε hε
   -- ε : ℝ
@@ -51,7 +51,7 @@ by
   -- ⊢ ∃ k, ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
   obtain ⟨a, ha⟩ := h
   -- a : ℝ
-  -- ha : LimSuc u a
+  -- ha : SeqLim u a
   obtain ⟨k, hk⟩ := ha (ε/2) (by grind)
   -- k : ℕ
   -- hk : ∀ n ≥ k, |u n - a| < ε / 2
@@ -69,8 +69,8 @@ by
 -- ===============
 
 example
-  (h : SucConvergente u)
-  : SucCauchy u :=
+  (h : SeqConv u)
+  : IsCauchy u :=
 by
   intros ε hε
   -- ε : ℝ
@@ -78,7 +78,7 @@ by
   -- ⊢ ∃ k, ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
   obtain ⟨a, ha⟩ := h
   -- a : ℝ
-  -- ha : LimSuc u a
+  -- ha : SeqLim u a
   obtain ⟨k, hk⟩ := ha (ε/2) (by grind)
   -- k : ℕ
   -- hk : ∀ n ≥ k, |u n - a| < ε / 2
@@ -100,8 +100,8 @@ by
 -- ===============
 
 example
-  (h : SucConvergente u)
-  : SucCauchy u :=
+  (h : SeqConv u)
+  : IsCauchy u :=
 by
   intros ε hε
   -- ε : ℝ
@@ -109,7 +109,7 @@ by
   -- ⊢ ∃ k, ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
   obtain ⟨a, ha⟩ := h
   -- a : ℝ
-  -- ha : LimSuc u a
+  -- ha : SeqLim u a
   obtain ⟨k, hk⟩ := ha (ε/2) (by positivity)
   -- k : ℕ
   -- hk : ∀ n ≥ k, |u n - a| < ε / 2
@@ -134,8 +134,8 @@ by
 -- ===============
 
 example
-  (h : SucConvergente u)
-  : SucCauchy u :=
+  (h : SeqConv u)
+  : IsCauchy u :=
 by
   intros ε hε
   -- ε : ℝ
@@ -143,7 +143,7 @@ by
   -- ⊢ ∃ k, ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
   obtain ⟨a, ha⟩ := h
   -- a : ℝ
-  -- ha : LimSuc u a
+  -- ha : SeqLim u a
   obtain ⟨k, hk⟩ := ha (ε/2) (half_pos hε)
   -- k : ℕ
   -- hk : ∀ n ≥ k, |u n - a| < ε / 2

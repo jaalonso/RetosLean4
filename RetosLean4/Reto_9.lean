@@ -48,7 +48,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc
+import RetosLean4.Defs -- SeqLim
 
 variable {a : ℕ → ℝ}
 variable {L M : ℝ}
@@ -57,8 +57,8 @@ variable {L M : ℝ}
 -- ===============
 
 example
-  (hL : LimSuc a L)
-  (hM : LimSuc a M)
+  (hL : SeqLim a L)
+  (hM : SeqLim a M)
   : L = M :=
 by
   by_contra h
@@ -86,8 +86,8 @@ by
 -- ===============
 
 example
-  (hL : LimSuc a L)
-  (hM : LimSuc a M)
+  (hL : SeqLim a L)
+  (hM : SeqLim a M)
   : L = M :=
 by
   by_contra h
@@ -110,8 +110,8 @@ by
 -- ===============
 
 example
-  (hL : LimSuc a L)
-  (hM : LimSuc a M)
+  (hL : SeqLim a L)
+  (hM : SeqLim a M)
   : L = M :=
 by
   by_contra h
@@ -143,9 +143,9 @@ by
 -- 4ª demostración
 -- ===============
 
-theorem unicidad_limite
-  (hL : LimSuc a L)
-  (hM : LimSuc a M)
+theorem seqLim_unique
+  (hL : SeqLim a L)
+  (hM : SeqLim a M)
   : L = M :=
 by
   by_contra h

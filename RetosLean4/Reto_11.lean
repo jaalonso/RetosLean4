@@ -32,7 +32,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc
+import RetosLean4.Defs -- SeqLim
 
 variable {a b : ℕ → ℝ}
 variable {L : ℝ}
@@ -41,9 +41,9 @@ variable {L : ℝ}
 -- ===============
 
 example
-  (ha : LimSuc a L)
+  (ha : SeqLim a L)
   (hb : ∀ n, b n = |a n|)
-  : LimSuc b |L| :=
+  : SeqLim b |L| :=
 by
   intro ε hε
   -- ε : ℝ
@@ -64,9 +64,9 @@ by
 -- ===============
 
 example
-  (ha : LimSuc a L)
+  (ha : SeqLim a L)
   (hb : ∀ n, b n = |a n|)
-  : LimSuc b |L| :=
+  : SeqLim b |L| :=
 by
   intro ε hε
   -- ε : ℝ
@@ -81,9 +81,9 @@ by
 -- ===============
 
 example
-  (ha : LimSuc a L)
+  (ha : SeqLim a L)
   (hb : ∀ n, b n = |a n|)
-  : LimSuc b |L| :=
+  : SeqLim b |L| :=
 by
   intro ε hε
   -- ε : ℝ
@@ -107,9 +107,9 @@ by
 -- ===============
 
 example
-  (ha : LimSuc a L)
+  (ha : SeqLim a L)
   (hb : ∀ n, b n = |a n|)
-  : LimSuc b |L| :=
+  : SeqLim b |L| :=
 by
   intro ε hε
   -- ε : ℝ
@@ -133,9 +133,9 @@ by
 -- ===============
 
 example
-  (ha : LimSuc a L)
+  (ha : SeqLim a L)
   (hb : ∀ n, b n = |a n|)
-  : LimSuc b |L| :=
+  : SeqLim b |L| :=
 by
   intro ε hε
   -- ε : ℝ

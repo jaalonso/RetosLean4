@@ -14,15 +14,15 @@
 -- Las definiciones anteriores se formalizan en Lean 4 como:
 --
 --    -- φ es una función de extracción.
---    def extraccion (φ : ℕ → ℕ) :=
+--    def IsExtraction (φ : ℕ → ℕ) :=
 --      StrictMono φ
 --
 --    -- v es una subsucesión de u.
---    def subsucesion (v u : ℕ → ℝ) :=
---      ∃ φ, extraccion φ ∧ v = u ∘ φ
+--    def Subseq (v u : ℕ → ℝ) :=
+--      ∃ φ, IsExtraction φ ∧ v = u ∘ φ
 --
 --    -- a es el límite de u.
---    def LimSuc (u : ℕ → ℝ) (a : ℝ) :=
+--    def SeqLim (u : ℕ → ℝ) (a : ℝ) :=
 --      ∀ ε > 0, ∃ k : ℕ, ∀ n ≥ k, |u n - a| < ε
 --
 -- El reto de esta semana consiste en demostrar en Lean 4 que toda
@@ -34,19 +34,19 @@
 --    variable {u v : ℕ → ℝ}
 --    variable {a : ℝ}
 --
---    def extraccion (φ : ℕ → ℕ):=
+--    def IsExtraction (φ : ℕ → ℕ):=
 --      StrictMono φ
 --
---    def subsucesion (v u : ℕ → ℝ) :=
---      ∃ φ, extraccion φ ∧ v = u ∘ φ
+--    def Subseq (v u : ℕ → ℝ) :=
+--      ∃ φ, IsExtraction φ ∧ v = u ∘ φ
 --
---    def LimSuc (u : ℕ → ℝ) (a : ℝ) :=
+--    def SeqLim (u : ℕ → ℝ) (a : ℝ) :=
 --      ∀ ε > 0, ∃ k : ℕ, ∀ n ≥ k, |u n - a| < ε
 --
 --    example
---      (hv : subsucesion v u)
---      (ha : LimSuc u a)
---      : LimSuc v a :=
+--      (hv : Subseq v u)
+--      (ha : SeqLim u a)
+--      : SeqLim v a :=
 --    by sorry
 -- ---------------------------------------------------------------
 
@@ -83,7 +83,7 @@
 -- ========================
 
 import Mathlib.Basic.Real.Basic
-import RetosLean4.Defs -- LimSuc, extraccion, subsucesion
+import RetosLean4.Defs -- SeqLim, IsExtraction, Subseq
 
 variable {u v : ℕ → ℝ}
 variable {a : ℝ}
@@ -92,13 +92,13 @@ variable {a : ℝ}
 -- ===============
 
 example
-  (hv : subsucesion v u)
-  (ha : LimSuc u a)
-  : LimSuc v a :=
+  (hv : Subseq v u)
+  (ha : SeqLim u a)
+  : SeqLim v a :=
 by
   obtain ⟨φ, hφ, hφ'⟩ := hv
   -- φ : ℕ → ℕ
-  -- hφ : extraccion φ
+  -- hφ : IsExtraction φ
   -- hφ' : v = u ∘ φ
   intros ε hε
   -- ε : ℝ
@@ -126,14 +126,14 @@ by
 -- ===============
 
 example
-  (hv : subsucesion v u)
-  (ha : LimSuc u a)
-  : LimSuc v a :=
+  (hv : Subseq v u)
+  (ha : SeqLim u a)
+  : SeqLim v a :=
 by
   obtain ⟨φ, hφ, rfl⟩ := hv
   -- φ : ℕ → ℕ
-  -- hφ : extraccion φ
-  -- ⊢ LimSuc (u ∘ φ) a
+  -- hφ : IsExtraction φ
+  -- ⊢ SeqLim (u ∘ φ) a
   intros ε hε
   -- ε : ℝ
   -- hε : ε > 0
@@ -159,14 +159,14 @@ by
 -- ===============
 
 example
-  (hv : subsucesion v u)
-  (ha : LimSuc u a)
-  : LimSuc v a :=
+  (hv : Subseq v u)
+  (ha : SeqLim u a)
+  : SeqLim v a :=
 by
   obtain ⟨φ, hφ, rfl⟩ := hv
   -- φ : ℕ → ℕ
-  -- hφ : extraccion φ
-  -- ⊢ LimSuc (u ∘ φ) a
+  -- hφ : IsExtraction φ
+  -- ⊢ SeqLim (u ∘ φ) a
   intros ε hε
   -- ε : ℝ
   -- hε : ε > 0
@@ -189,15 +189,15 @@ by
 -- 4ª demostración
 -- ===============
 
-theorem limite_subsucesion
-  (hv : subsucesion v u)
-  (ha : LimSuc u a)
-  : LimSuc v a :=
+theorem seqLim_of_subseq
+  (hv : Subseq v u)
+  (ha : SeqLim u a)
+  : SeqLim v a :=
 by
   obtain ⟨φ, hφ, rfl⟩ := hv
   -- φ : ℕ → ℕ
-  -- hφ : extraccion φ
-  -- ⊢ LimSuc (u ∘ φ) a
+  -- hφ : IsExtraction φ
+  -- ⊢ SeqLim (u ∘ φ) a
   intros ε hε
   -- ε : ℝ
   -- hε : ε > 0

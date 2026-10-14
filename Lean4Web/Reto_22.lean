@@ -28,7 +28,7 @@
 --      ∃ φ, extraccion φ ∧ b = a ∘ φ
 --
 --    variable {a b₁ b₂ : ℕ → ℝ}
---    variable {L L₁ L₂ M : ℝ}
+--    variable {L L₁ L₂ : ℝ}
 --
 --    example
 --      (hb₁ : subsucesion b₁ a)
@@ -118,7 +118,7 @@ by
   -- ⊢ L₁ = L₂
   obtain ⟨L, hL⟩ := h1
   -- L : ℝ
-  -- hL : LimSac a L
+  -- hL : LimSuc a L
   have h2 : LimSuc b₁ L := limite_subsucesion hb₁ hL
   have h3 : LimSuc b₂ L := limite_subsucesion hb₂ hL
   calc L₁
@@ -147,7 +147,7 @@ by
 -- 3ª demostración
 -- ===============
 
-theorem CS_no_convergencia
+theorem no_convergencia_subsucesiones
   (hb₁ : subsucesion b₁ a)
   (hL₁ : LimSuc b₁ L₁)
   (hb₂ : subsucesion b₂ a)

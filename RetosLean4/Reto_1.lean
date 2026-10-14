@@ -9,7 +9,7 @@
 --
 -- Se define que L es el límite de la sucesión a, por
 --
--- def LimSuc (a : ℕ → ℝ) (L : ℝ) : Prop :=
+-- def SeqLim (a : ℕ → ℝ) (L : ℝ) : Prop :=
 --   ∀ ε > 0, ∃ k : ℕ, ∀ n ≥ k, |a n - L| < ε
 --
 -- Demostrar que si para todo n, aₙ=1/n, entonces la sucesión
@@ -22,12 +22,12 @@
 --
 -- variable (a : ℕ → ℝ)
 --
--- def LimSuc (a : ℕ → ℝ) (L : ℝ) : Prop :=
+-- def SeqLim (a : ℕ → ℝ) (L : ℝ) : Prop :=
 --   ∀ ε > 0, ∃ k : ℕ, ∀ n ≥ k, |a n - L| < ε
 --
 -- example
 --   (ha : ∀ n, a n = 1 / n)
---   : LimSuc a 0 :=
+--   : SeqLim a 0 :=
 -- by sorry
 -- -----------------------------------------------------------
 
@@ -50,7 +50,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc
+import RetosLean4.Defs -- SeqLim
 
 variable (a : ℕ → ℝ)
 
@@ -84,7 +84,7 @@ by
 
 example
   (ha : ∀ n, a n = 1 / n)
-  : LimSuc a 0 :=
+  : SeqLim a 0 :=
 by
   intro ε hε
   -- ε : ℝ
@@ -174,7 +174,7 @@ by
 
 example
   (ha : ∀ n, a n = 1 / n)
-  : LimSuc a 0 :=
+  : SeqLim a 0 :=
 by
   intro ε hε
   -- ε : ℝ

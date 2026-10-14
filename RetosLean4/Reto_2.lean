@@ -14,15 +14,15 @@
 --
 --    variable {a : ℕ → ℝ}
 --
---    def LimSuc (a : ℕ → ℝ) (L : ℝ) : Prop :=
+--    def SeqLim (a : ℕ → ℝ) (L : ℝ) : Prop :=
 --      ∀ ε > 0, ∃ N : ℕ, ∀ n ≥ N, |a n - L| < ε
 --
---    def SucConvergente (a : ℕ → ℝ) : Prop :=
---      ∃ L, LimSuc a L
+--    def SeqConv (a : ℕ → ℝ) : Prop :=
+--      ∃ L, SeqLim a L
 --
 --    example
 --      (ha : ∀ n, a n = (-1) ^ n)
---      : ¬ SucConvergente a :=
+--      : ¬ SeqConv a :=
 --    by sorry
 -- ---------------------------------------------------------------------
 
@@ -50,7 +50,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc, SucConvergente
+import RetosLean4.Defs -- SeqLim, SeqConv
 
 variable {a : ℕ → ℝ}
 
@@ -59,14 +59,14 @@ variable {a : ℕ → ℝ}
 
 example
   (ha : ∀ n, a n = (-1) ^ n)
-  : ¬ SucConvergente a :=
+  : ¬ SeqConv a :=
 by
   intro h
-  -- h : SucConvergente a
+  -- h : SeqConv a
   -- ⊢ False
   obtain ⟨L, hL⟩ := h
   -- L : ℝ
-  -- hL : LimSuc a L
+  -- hL : SeqLim a L
   obtain ⟨N, hN⟩ := hL (1/2) (by grind)
   -- N : ℕ
   -- hN : ∀ n ≥ N, |a n - L| < 1 / 2
@@ -92,11 +92,11 @@ by
 
 example
   (ha : ∀ n, a n = (-1) ^ n)
-  : ¬SucConvergente a :=
+  : ¬SeqConv a :=
 by
   rintro ⟨L, hL⟩
   -- L : ℝ
-  -- hL : LimSuc a L
+  -- hL : SeqLim a L
   -- ⊢ False
   obtain ⟨N, hN⟩ := hL (1 / 2) (by positivity)
   -- N : ℕ
@@ -123,78 +123,78 @@ variable {x y z x' y' : ℝ}
 variable {m n k : ℕ}
 variable (f : ℝ → ℝ)
 
-lemma Reto2_L1 : (1 - x) + (1 + x) = 2 := by
+lemma Challenge2_L1 : (1 - x) + (1 + x) = 2 := by
   calc (1 - x) + (1 + x)
        = 1 + 1             := sub_add_add_cancel 1 1 x
      _ = 2                 := one_add_one_eq_two
 
-lemma Reto2_L2 : (-1:ℝ) * -1 = 1 := by
+lemma Challenge2_L2 : (-1:ℝ) * -1 = 1 := by
   calc (-1:ℝ) * -1
        = 1 * 1   := neg_mul_neg 1 1
      _ = 1       := one_mul 1
 
-lemma Reto2_L3 : -1 * -x = x := by
+lemma Challenge2_L3 : -1 * -x = x := by
   calc -1 * -x
        = -(1 * -x) := neg_mul 1 (-x)
      _ = - -x      := congr_arg (- ·) (one_mul (-x))
      _ = x         := neg_neg x
 
-lemma Reto2_L4 : -1 * (-1 - x) = 1 + x := by
+lemma Challenge2_L4 : -1 * (-1 - x) = 1 + x := by
   calc -1 * (-1 - x)
        = -1 * (-1 + -x)     := congr_arg (-1 * ·) (sub_eq_add_neg (-1) x)
      _ = -1 * -1 + -1 * -x  := left_distrib (-1) (-1) (-x)
-     _ = 1 + -1 * -x        := congr_arg (· + (-1)*(-x)) Reto2_L2
-     _ = 1 + x              := congr_arg ( 1 + ·) Reto2_L3
+     _ = 1 + -1 * -x        := congr_arg (· + (-1)*(-x)) Challenge2_L2
+     _ = 1 + x              := congr_arg ( 1 + ·) Challenge2_L3
 
-lemma Reto2_L5 : |-1 * (-1 - x)| = |-1 - x| := by
+lemma Challenge2_L5 : |-1 * (-1 - x)| = |-1 - x| := by
   calc |-1 * (-1 - x)|
        = |-1| * |-1 - x| := abs_mul (-1) (-1 - x)
      _ = |1| * |-1 - x|  := congrArg (· * |-1 - x|) (abs_neg 1)
      _ = 1 * |-1 - x|    := congrArg (· * |-1 - x|) abs_one
      _ = |-1 - x|        := one_mul |-1 - x|
 
-lemma Reto2_L6 : (-1:ℝ)^(2*n) = 1 := by
+lemma Challenge2_L6 : (-1:ℝ)^(2*n) = 1 := by
   calc (-1:ℝ)^(2*n)
        = ((-1:ℝ)^2)^n := pow_mul (-1) 2 n
      _ = (1:ℝ)^n      := congr_arg ( · ^ n) neg_one_sq
      _ = 1            := one_pow n
 
-lemma Reto2_L7 : (-1:ℝ)^(2*n+1) = -1 := by
+lemma Challenge2_L7 : (-1:ℝ)^(2*n+1) = -1 := by
   calc (-1:ℝ)^(2*n+1)
        = (-1)^(2*n) * -1 := pow_succ (-1) (2 * n)
-     _ = 1 * -1          := congr_arg (· * -1) Reto2_L6
+     _ = 1 * -1          := congr_arg (· * -1) Challenge2_L6
      _ = -1              := one_mul (-1)
 
-lemma Reto2_L8 : n ≤ 2 * n := by
+lemma Challenge2_L8 : n ≤ 2 * n := by
   calc n
        = 1 * n := (one_mul n).symm
      _ ≤ 2 * n := Nat.mul_le_mul_right n one_le_two
 
-lemma Reto2_L9
+lemma Challenge2_L9
   (hN : ∀ n ≥ N, |a n - x| < 1 / 2)
   : |a (2*N) - x| < 1 / 2 :=
-hN (2*N) Reto2_L8
+hN (2*N) Challenge2_L8
 
-lemma Reto2_L10 : n ≤ 2 * n + 1 := by
+lemma Challenge2_L10 : n ≤ 2 * n + 1 := by
   calc n
-       ≤ 2 * n     := Reto2_L8
+       ≤ 2 * n     := Challenge2_L8
      _ ≤ 2 * n + 1 := Nat.le_add_right (2 * n) 1
 
-lemma Reto2_L11
+lemma Challenge2_L11
   (hN : ∀ n ≥ N, |a n - x| < 1 / 2)
   : |a (2*N+1) - x| < 1 / 2 :=
-hN (2*N+1) Reto2_L10
+hN (2*N+1) Challenge2_L10
 
 example
   (ha : ∀ n, a n = (-1) ^ n)
-  : ¬ SucConvergente a :=
+  : ¬ SeqConv a :=
 by
   intro h
-  -- h : SucConvergente a
+  -- h : SeqConv a
   -- ⊢ False
   obtain ⟨L, hL⟩ := h
   -- L : ℝ
-  -- hL : LimSuc a L
+  -- hL : SeqLim a L
   obtain ⟨N, hN⟩ := hL (1/2) one_half_pos
   -- N : ℕ
   -- hN : ∀ n ≥ N, |a n - L| < 1 / 2
@@ -205,21 +205,21 @@ by
     2 = |2| :=
           abs_two.symm
     _ = |(1 - L) + (1 + L)| :=
-          congrArg abs Reto2_L1.symm
+          congrArg abs Challenge2_L1.symm
     _ = |(1 - L) + (-1)*(-1 - L)| :=
-          congr_arg (abs ((1 - L) + ·)) Reto2_L4.symm
+          congr_arg (abs ((1 - L) + ·)) Challenge2_L4.symm
     _ ≤ |1 - L| + |(-1)*(-1 - L)| :=
           abs_add_le (1 - L) (-1 * (-1 - L))
     _ = |1 - L| + |-1 - L| :=
-          congr_arg (|1 - L| + ·) Reto2_L5
+          congr_arg (|1 - L| + ·) Challenge2_L5
     _ = |(-1:ℝ)^(2*N) - L| + |(-1:ℝ)^(2*N+1) - L|  :=
-          congrArg₂ (|· - L| + |· - L|) Reto2_L6.symm Reto2_L7.symm
+          congrArg₂ (|· - L| + |· - L|) Challenge2_L6.symm Challenge2_L7.symm
     _ = |a (2*N) - L| + |a (2*N+1) - L| :=
           congrArg₂ (· + ·)
             (congrArg (|· - L|) (ha (2*N)).symm)
             (congrArg (|· - L|) (ha (2*N+1)).symm)
     _ < 1 / 2 + 1 / 2 :=
-          add_lt_add (Reto2_L9 hN) (Reto2_L11 hN)
+          add_lt_add (Challenge2_L9 hN) (Challenge2_L11 hN)
     _ = 1 := add_halves 1
 
 -- Lemas usados

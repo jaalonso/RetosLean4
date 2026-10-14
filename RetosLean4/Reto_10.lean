@@ -40,7 +40,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc
+import RetosLean4.Defs -- SeqLim
 
 variable {a : ℕ → ℝ}
 variable {L : ℝ}
@@ -49,7 +49,7 @@ variable {L : ℝ}
 -- ===============
 
 example
-  (ha : LimSuc a L)
+  (ha : SeqLim a L)
   (hL : L ≠ 0)
   : ∃ k, ∀ n ≥ k, |a n| ≥ |L| / 2 :=
 by
@@ -68,7 +68,7 @@ by
 -- ===============
 
 example
-  (ha : LimSuc a L)
+  (ha : SeqLim a L)
   (hL : L ≠ 0)
   : ∃ k, ∀ n ≥ k,  |a n| ≥ |L| / 2 :=
 by
@@ -95,7 +95,7 @@ by
 -- ===============
 
 example
-  (ha : LimSuc a L)
+  (ha : SeqLim a L)
   (hL : L ≠ 0)
   : ∃ k, ∀ n ≥ k, |a n| ≥ |L| / 2 :=
 by
@@ -122,7 +122,7 @@ by
 -- ===============
 
 example
-  (ha : LimSuc a L)
+  (ha : SeqLim a L)
   (hL : L ≠ 0)
   : ∃ k, ∀ n ≥ k, |a n| ≥ |L| / 2 :=
 by
@@ -151,8 +151,8 @@ by
 -- 5ª demostración
 -- ===============
 
-lemma EventualmenteMayorIgMitadAbsLimitePos
-  (ha : LimSuc a L)
+lemma exists_half_abs_le_abs_of_seqLim_of_ne_zero
+  (ha : SeqLim a L)
   (hL : L ≠ 0)
   : ∃ k, ∀ n ≥ k, |a n| ≥ |L| / 2 :=
 by

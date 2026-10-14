@@ -67,7 +67,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc
+import RetosLean4.Defs -- SeqLim
 
 variable {a b c : ℕ → ℝ}
 variable {L M : ℝ}
@@ -76,10 +76,10 @@ variable {L M : ℝ}
 -- ===========
 
 example
-  (ha : LimSuc a L)
-  (hb : LimSuc b M)
+  (ha : SeqLim a L)
+  (hb : SeqLim b M)
   (hc : ∀ n, c n = a n * b n)
-  : LimSuc c (L * M) :=
+  : SeqLim c (L * M) :=
 by
   intro ε hε
   -- ε : ℝ
@@ -131,7 +131,7 @@ by
 -- ===========
 
 lemma L1
-  (h : LimSuc a L)
+  (h : SeqLim a L)
   : ∃ k, ∀ n ≥ k, |a n| < 1 + |L| :=
 by
   obtain ⟨k, hk⟩ := h 1 one_pos
@@ -149,10 +149,10 @@ by
      _ < 1 + |L|         := (add_lt_add_iff_right |L|).mpr (hk n hn)
 
 example
-  (ha : LimSuc a L)
-  (hb : LimSuc b M)
+  (ha : SeqLim a L)
+  (hb : SeqLim b M)
   (hc : ∀ n, c n = a n * b n)
-  : LimSuc c (L * M) :=
+  : SeqLim c (L * M) :=
 by
   intro ε hε
   -- ε : ℝ

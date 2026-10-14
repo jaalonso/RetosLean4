@@ -47,7 +47,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc
+import RetosLean4.Defs -- SeqLim
 
 variable {a : ℕ → ℝ}
 variable {L : ℝ}
@@ -57,11 +57,11 @@ variable {L : ℝ}
 
 example
   (ha : ∀ k, ∃ n ≥ k, |a n| > 10)
-  : ¬ ∃ L, LimSuc a L ∧ |L| < 5 :=
+  : ¬ ∃ L, SeqLim a L ∧ |L| < 5 :=
 by
   intro ⟨L, hL1, hL2⟩
   -- L : ℝ
-  -- hL1 : LimSuc a L
+  -- hL1 : SeqLim a L
   -- hL2 : |L| < 5
   -- ⊢ False
   obtain ⟨k, hk⟩ := hL1 5 (by norm_num)
@@ -78,11 +78,11 @@ by
 
 example
   (ha : ∀ k, ∃ n ≥ k, |a n| > 10)
-  : ¬ ∃ L, LimSuc a L ∧ |L| < 5 :=
+  : ¬ ∃ L, SeqLim a L ∧ |L| < 5 :=
 by
   intro ⟨L, hL1, hL2⟩
   -- L : ℝ
-  -- hL1 : LimSuc a L
+  -- hL1 : SeqLim a L
   -- hL2 : |L| < 5
   -- ⊢ False
   obtain ⟨k, hk⟩ := hL1 5 (by norm_num)
@@ -105,11 +105,11 @@ by
 
 example
   (ha : ∀ k, ∃ n ≥ k, |a n| > 10)
-  : ¬ ∃ L, LimSuc a L ∧ |L| < 5 :=
+  : ¬ ∃ L, SeqLim a L ∧ |L| < 5 :=
 by
   intro ⟨L, hL1, hL2⟩
   -- L : ℝ
-  -- hL1 : LimSuc a L
+  -- hL1 : SeqLim a L
   -- hL2 : |L| < 5
   -- ⊢ False
   obtain ⟨k, hk⟩ := hL1 5 (by positivity)

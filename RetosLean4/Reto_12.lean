@@ -54,7 +54,7 @@
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- LimSuc
+import RetosLean4.Defs -- SeqLim
 
 variable {a b : ℕ → ℝ}
 variable {L M : ℝ}
@@ -63,8 +63,8 @@ variable {L M : ℝ}
 -- ===============
 
 example
-  (ha : LimSuc a L)
-  (hb : LimSuc b M)
+  (ha : SeqLim a L)
+  (hb : SeqLim b M)
   (hLM : L < M)
   : ∃ k, ∀ n ≥ k, a n < b n :=
 by
@@ -83,8 +83,8 @@ by
 -- ===============
 
 example
-  (ha : LimSuc a L)
-  (hb : LimSuc b M)
+  (ha : SeqLim a L)
+  (hb : SeqLim b M)
   (hLM : L < M)
   : ∃ k, ∀ n ≥ k, a n < b n :=
 by
@@ -114,8 +114,8 @@ by
 -- ===============
 
 example
-    (ha : LimSuc a L)
-    (hb : LimSuc b M)
+    (ha : SeqLim a L)
+    (hb : SeqLim b M)
     (hLM : L < M) :
     ∃ k, ∀ n ≥ k, a n < b n := by
   set ε := (M - L) / 2 with ε_def
@@ -152,8 +152,8 @@ example
 -- ===============
 
 example
-  (ha : LimSuc a L)
-  (hb : LimSuc b M)
+  (ha : SeqLim a L)
+  (hb : SeqLim b M)
   (hLM : L < M)
   : ∃ k, ∀ n ≥ k, a n < b n :=
 by
@@ -192,8 +192,8 @@ by
 -- ===============
 
 example
-  (ha : LimSuc a L)
-  (hb : LimSuc b M)
+  (ha : SeqLim a L)
+  (hb : SeqLim b M)
   (hLM : L < M)
   : ∃ k, ∀ n ≥ k, a n < b n :=
 by
