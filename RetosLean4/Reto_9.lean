@@ -46,9 +46,10 @@
 -- Demostraciones con Lean4
 -- ========================
 
-import Mathlib.Basic.Real.Basic
+module
+
+public import RetosLean4.Defs -- SeqLim
 import Mathlib.Tactic
-import RetosLean4.Defs -- SeqLim
 
 variable {a : ℕ → ℝ}
 variable {L M : ℝ}
@@ -143,7 +144,7 @@ by
 -- 4ª demostración
 -- ===============
 
-theorem seqLim_unique
+public theorem seqLim_unique
   (hL : SeqLim a L)
   (hM : SeqLim a M)
   : L = M :=

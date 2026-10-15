@@ -82,8 +82,10 @@
 -- Demostraciones con Lean4
 -- ========================
 
+module
+
 import Mathlib.Basic.Real.Basic
-import RetosLean4.Defs -- SeqLim, IsExtraction, Subseq
+public import RetosLean4.Defs -- SeqLim, IsExtraction, Subseq
 
 variable {u v : ℕ → ℝ}
 variable {a : ℝ}
@@ -189,7 +191,7 @@ by
 -- 4ª demostración
 -- ===============
 
-theorem seqLim_of_subseq
+public theorem seqLim_of_subseq
   (hv : Subseq v u)
   (ha : SeqLim u a)
   : SeqLim v a :=

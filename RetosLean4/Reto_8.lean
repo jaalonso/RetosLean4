@@ -45,6 +45,8 @@
 -- Demostraciones con Lean4
 -- ========================
 
+module
+
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
 import RetosLean4.Defs -- SeqLim

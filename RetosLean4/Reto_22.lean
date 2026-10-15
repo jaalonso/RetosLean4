@@ -59,8 +59,10 @@
 -- Demostraciones en Lean 4
 -- ========================
 
+module
+
 import Mathlib.Tactic
-import RetosLean4.Defs -- SeqLim, SeqConv, IsExtraction, Subseq
+public import RetosLean4.Defs -- SeqLim, SeqConv, IsExtraction, Subseq
 import RetosLean4.Reto_9 -- seqLim_unique
 import RetosLean4.Reto_21 -- seqLim_of_subseq
 
@@ -113,7 +115,7 @@ by
 -- 3ª demostración
 -- ===============
 
-theorem not_seqConv_of_subseq_seqLim_ne
+public theorem not_seqConv_of_subseq_seqLim_ne
   (hb₁ : Subseq b₁ a)
   (hL₁ : SeqLim b₁ L₁)
   (hb₂ : Subseq b₂ a)

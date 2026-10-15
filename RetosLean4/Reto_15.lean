@@ -119,6 +119,8 @@
 -- Demostraciones con Lean 4
 -- =========================
 
+module
+
 import Mathlib.Tactic
 
 -- 1ª solución

@@ -38,9 +38,11 @@
 -- Demostraciones con Lean4
 -- ========================
 
+module
+
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- SeqLim
+public import RetosLean4.Defs -- SeqLim
 
 variable {a : ℕ → ℝ}
 variable {L : ℝ}
@@ -151,7 +153,7 @@ by
 -- 5ª demostración
 -- ===============
 
-lemma exists_half_abs_le_abs_of_seqLim_of_ne_zero
+public theorem exists_half_abs_le_abs_of_seqLim_of_ne_zero
   (ha : SeqLim a L)
   (hL : L ≠ 0)
   : ∃ k, ∀ n ≥ k, |a n| ≥ |L| / 2 :=

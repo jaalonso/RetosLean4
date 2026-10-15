@@ -2,7 +2,11 @@
 -- Definiciones usadas en los retos de demostración en Lean 4.
 -- -----------------------------------------------------------
 
-import Mathlib.Basic.Real.Basic
+module
+
+public import Mathlib.Basic.Real.Basic
+
+@[expose] public section
 
 -- L es el límite de la sucesión a.
 def SeqLim (a : ℕ → ℝ) (L : ℝ) : Prop :=
@@ -20,14 +24,14 @@ def SeqBdd (a : ℕ → ℝ) : Prop :=
 def IsUB (a : ℕ → ℝ) (M : ℝ) : Prop :=
   ∀ n, a n ≤ M
 
--- a es una sucesión de Cauchy,
+-- a es una sucesión de Cauchy.
 def IsCauchy (a : ℕ → ℝ) : Prop :=
   ∀ ε > 0, ∃ N : ℕ, ∀ p ≥ N, ∀ q ≥ N, |a p - a q| < ε
 
 -- φ es una función de extracción.
-def IsExtraction (φ : ℕ → ℕ):=
+def IsExtraction (φ : ℕ → ℕ) : Prop :=
   StrictMono φ
 
 -- v es una subsucesión de u.
-def Subseq (v u : ℕ → ℝ) :=
+def Subseq (v u : ℕ → ℝ) : Prop :=
   ∃ φ, IsExtraction φ ∧ v = u ∘ φ
