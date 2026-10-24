@@ -200,3 +200,32 @@ by
      _ < ε             := L5 hε hk
 
 end Solucion2
+
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución C1
+-- ===========
+
+example
+  (ha : ∀ n, a n = 1 / n)
+  : SeqLim a 0 :=
+by
+  have h : Filter.Tendsto a Filter.atTop (nhds 0) := by
+    have h1 : a = fun n : ℕ => 1 / (n : ℝ) := funext ha
+    rw [h1]
+    -- ⊢ Filter.Tendsto (fun n => 1 / ↑n) Filter.atTop (nhds 0)
+    exact tendsto_const_div_atTop_nhds_zero_nat 1
+  intro ε hε
+  -- ε : ℝ
+  -- hε : ε > 0
+  -- ⊢ ∃ k, ∀ n ≥ k, |a n - 0| < ε
+  obtain ⟨k, hk⟩ := Metric.tendsto_atTop.mp h ε hε
+  -- k : ℕ
+  -- hk : ∀ n ≥ k, dist (a n) 0 < ε
+  refine ⟨k, fun n hn => ?_⟩
+  -- n : ℕ
+  -- hn : n ≥ k
+  -- ⊢ |a n - 0| < ε
+  have h2 : dist (a n) 0 < ε := hk n hn
+  rwa [Real.dist_eq] at h2

@@ -36,6 +36,7 @@ module
 
 import Mathlib.Data.Nat.Prime.Defs
 import Mathlib.Tactic
+import Mathlib.NumberTheory.Bertrand -- para C1
 
 open Nat
 
@@ -115,3 +116,20 @@ variable (k m n : ℕ)
 #check (minFac_prime : n ≠ 1 → Nat.Prime (minFac n))
 #check (succ_lt_succ : n < m → n + 1 < m + 1)
 -/
+
+-- Soluciones colaborativas
+-- ========================
+
+example (n : ℕ) : ∃ p, n ≤ p ∧ Nat.Prime p :=
+by
+  rcases Nat.eq_zero_or_pos n with rfl | hn
+  · -- ⊢ ∃ p, 0 ≤ p ∧ Nat.Prime p
+    exact ⟨2, Nat.zero_le _, Nat.prime_two⟩
+  · -- n : ℕ
+    -- hn : n > 0
+    -- ⊢ ∃ p, n ≤ p ∧ Nat.Prime p
+    obtain ⟨p, hp, hnp, -⟩ := Nat.exists_prime_lt_and_le_two_mul n hn.ne'
+    -- p : ℕ
+    -- hp : Nat.Prime p
+    -- hnp : n < p
+    exact ⟨p, hnp.le, hp⟩

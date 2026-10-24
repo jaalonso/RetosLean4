@@ -160,3 +160,52 @@ variable (x y z : ℝ)
 #check (two_ne_zero : 2 ≠ 0)
 #check (zero_lt_two : 0 < 2)
 -/
+
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución C1
+-- ===========
+
+example
+  (ha : SeqLim a L)
+  (hb : ∀ n, b n = 2 * a n)
+  : SeqLim b (2 * L) :=
+by
+  have ha' : Filter.Tendsto a Filter.atTop (nhds L) := by
+    rw [Metric.tendsto_atTop]
+    -- ⊢ ∀ ε > 0, ∃ N, ∀ n ≥ N, dist (a n) L < ε
+    intro ε hε
+    -- ε : ℝ
+    -- hε : ε > 0
+    -- ⊢ ∃ N, ∀ n ≥ N, dist (a n) L < ε
+    obtain ⟨N, hN⟩ := ha ε hε
+    -- N : ℕ
+    -- hN : ∀ n ≥ N, |a n - L| < ε
+    refine ⟨N, fun n hn => ?_⟩
+    -- n : ℕ
+    -- hn : n ≥ N
+    -- ⊢ dist (a n) L < ε
+    rw [Real.dist_eq]
+    -- ⊢ |a n - L| < ε
+    exact hN n hn
+  have hb' : Filter.Tendsto b Filter.atTop (nhds (2 * L)) := by
+    have e : b = fun n => 2 * a n := funext hb
+    rw [e]
+    -- ⊢ Filter.Tendsto (fun n => 2 * a n) Filter.atTop (nhds (2 * L))
+    exact ha'.const_mul 2
+  intro ε hε
+  -- ε : ℝ
+  -- hε : ε > 0
+  -- ⊢ ∃ k, ∀ n ≥ k, |b n - 2 * L| < ε
+  obtain ⟨N, hN⟩ := Metric.tendsto_atTop.mp hb' ε hε
+  -- N : ℕ
+  -- hN : ∀ n ≥ N, dist (b n) (2 * L) < ε
+  refine ⟨N, fun n hn => ?_⟩
+  -- n : ℕ
+  -- hn : n ≥ N
+  -- ⊢ |b n - 2 * L| < ε
+  have h : dist (b n) (2 * L) < ε := hN n hn
+  rw [Real.dist_eq] at h
+  -- h : |b n - 2 * L| < ε
+  exact h

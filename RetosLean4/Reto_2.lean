@@ -255,3 +255,40 @@ variable (a b c d : ℝ)
 #check (sub_add_add_cancel a b c : a - c + (b + c) = a + b)
 #check (sub_eq_add_neg a b : a - b = a + -b)
 -/
+
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución C1
+-- ===========
+
+example
+  (ha : ∀ n, a n = (-1) ^ n)
+  : ¬ SeqConv a :=
+by
+  rintro ⟨L, hL⟩
+  -- L : ℝ
+  -- hL : SeqLim a L
+  -- ⊢ False
+  obtain ⟨k, hk⟩ := hL 1 one_pos
+  -- k : ℕ
+  -- hk : ∀ n ≥ k, |a n - L| < 1
+  rcases le_or_gt 0 L with hL0 | hL0
+  · -- hL0 : 0 ≤ L
+    have h : |a (2 * k + 1) - L| < 1 := hk (2 * k + 1) (by omega)
+    have e : a (2 * k + 1) = -1 := by
+      rw [ha, pow_succ, pow_mul]
+      -- ⊢ ((-1) ^ 2) ^ k * -1 = -1
+      norm_num
+    rw [e, abs_lt] at h
+    -- h : -1 < -1 - L ∧ -1 - L < 1
+    linarith [h.1]
+  · -- hL0 : 0 > L
+    have h : |a (2 * k) - L| < 1 := hk (2 * k) (by omega)
+    have e : a (2 * k) = 1 := by
+      rw [ha, pow_mul]
+      -- ⊢ ((-1) ^ 2) ^ k = 1
+      norm_num
+    rw [e, abs_lt] at h
+    -- h : -1 < 1 - L ∧ 1 - L < 1
+    linarith [h.2]

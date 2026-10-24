@@ -470,3 +470,26 @@ variable (a b c m k : ℕ)
 #check (pow_mul m n k : m ^ (n * k) = (m ^ n) ^ k)
 #check (right_distrib n m k : (n + m) * k = n * k + m * k)
 -/
+
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución C1
+-- ===========
+
+example : 17 ∣ 5^(2 * n) - 2^(3 * n) :=
+by
+  have h : 2^(3 * n) ≤ 5^(2 * n) := by
+    rw [pow_mul, pow_mul]
+    -- ⊢ (2 ^ 3) ^ n ≤ (5 ^ 2) ^ n
+    exact Nat.pow_le_pow_left (by norm_num) n
+  rw [← ZMod.natCast_eq_zero_iff]
+  -- ⊢ ⊢ ↑(5 ^ (2 * n) - 2 ^ (3 * n)) = 0
+  rw [Nat.cast_sub h]
+  -- ⊢ ↑(5 ^ (2 * n)) - ↑(2 ^ (3 * n)) = 0
+  push_cast
+  -- ⊢ (5 : ZMod 17) ^ (2 * n) - 2 ^ (3 * n) = 0
+  rw [pow_mul, pow_mul]
+  -- ⊢ ((5 : ZMod 17) ^ 2) ^ n - ((2 : ZMod 17) ^ 3) ^ n = 0
+  have h2 : (5 : ZMod 17) ^ 2 = 2 ^ 3 := by decide
+  rw [h2, sub_self]

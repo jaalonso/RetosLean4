@@ -233,3 +233,37 @@ by
     calc b n - L
        ≤ c n - L := sub_le_sub_right (hbc n) L
      _ < ε       := hNc.2
+
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución C1
+-- ===========
+
+example
+  (ha : SeqLim a L)
+  (hc : SeqLim c L)
+  (hab : ∀ n, a n ≤ b n)
+  (hbc : ∀ n, b n ≤ c n)
+  : SeqLim b L :=
+by
+  intro ε hε
+  -- ε : ℝ
+  -- hε : ε > 0
+  -- ⊢ ∃ k, ∀ n ≥ k, |b n - L| < ε
+  obtain ⟨Na, hNa⟩ := ha ε hε
+  -- Na : ℕ
+  -- hNa : ∀ n ≥ Na, |a n - L| < ε
+  obtain ⟨Nc, hNc⟩ := hc ε hε
+  -- Nc : ℕ
+  -- hNc : ∀ n ≥ Nc, |c n - L| < ε
+  refine ⟨Na + Nc, fun n hn => ?_⟩
+  -- n : ℕ
+  -- hn : n ≥ Na + Nc
+  -- ⊢ |b n - L| < ε
+  have h1 : |a n - L| < ε := hNa n (le_trans (Nat.le_add_right Na Nc) hn)
+  have h2 : |c n - L| < ε := hNc n (le_trans (Nat.le_add_left Nc Na) hn)
+  calc |b n - L|
+      ≤ max |a n - L| |c n - L| :=
+          abs_le_max_abs_abs (sub_le_sub_right (hab n) L) (sub_le_sub_right (hbc n) L)
+    _ < ε := max_lt h1 h2
