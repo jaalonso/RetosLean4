@@ -18,7 +18,7 @@ def SeqConv (a : ℕ → ℝ) : Prop :=
 
 -- La sucesión a está acotada.
 def SeqBdd (a : ℕ → ℝ) : Prop :=
-  ∃ M, ∀ n, |a n| ≤ M
+  ∃ M > 0, ∀ n, |a n| ≤ M
 
 -- M es una cota superior de la sucesión a.
 def IsUB (a : ℕ → ℝ) (M : ℝ) : Prop :=

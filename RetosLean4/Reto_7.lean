@@ -187,3 +187,23 @@ Injective.comp hg hf
 /-
 #check (Injective.comp : Injective g → Injective f → Injective (g ∘ f))
 -/
+
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución C1
+-- ===========
+
+example
+  (hg : Injective g)
+  (hf : Injective f) :
+  Injective (g ∘ f) :=
+by
+  intro x y h
+  -- x y : α
+  -- h : (g ∘ f) x = (g ∘ f) y
+  -- ⊢ x = y
+  by_contra hxy
+  -- hxy : ¬x = y
+  -- ⊢ False
+  exact (hg.ne (hf.ne hxy)) h

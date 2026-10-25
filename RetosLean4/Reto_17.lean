@@ -408,19 +408,22 @@ by
   set M := max (|L| + 1) C with hM
   -- hM : M = max (|L| + 1) C
   use M
-  -- ⊢ ∀ (n : ℕ), |a n| ≤ M
-  intro n
-  -- n : ℕ
-  -- ⊢ |a n| ≤ M
-  rcases lt_or_ge n k with hn1 | hn2
-  · -- hn1 : n < k
-    calc |a n|
-         ≤ C := hC n hn1
-       _ ≤ M := le_max_right _ C
-  · -- hn2 : k ≤ n
-    calc |a n|
-         ≤ |L| + 1 := le_of_lt (hk n hn2)
-       _ ≤ M       := le_max_left (|L| + 1) _
+  -- ⊢ M > 0 ∧ ∀ (n : ℕ), |a n| ≤ M
+  constructor
+  · -- ⊢ M > 0
+    grind
+  · intro n
+    -- n : ℕ
+    -- ⊢ |a n| ≤ M
+    rcases lt_or_ge n k with hn1 | hn2
+    · -- hn1 : n < k
+      calc |a n|
+           ≤ C := hC n hn1
+         _ ≤ M := le_max_right _ C
+    · -- hn2 : k ≤ n
+      calc |a n|
+           ≤ |L| + 1 := le_of_lt (hk n hn2)
+         _ ≤ M       := le_max_left (|L| + 1) _
 
 -- Lemas usados
 -- ============
