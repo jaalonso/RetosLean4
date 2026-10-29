@@ -176,27 +176,32 @@ by
        _ < ε/2 + ε/2               := add_lt_add h4 h5
        _ = ε                       := add_halves ε
 
--- Lemas usados
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución SC1
 -- ============
 
-/-
-namespace Lemas
+open Filter Topology
 
-variable (a b c d : ℝ)
-variable (f : ℝ → ℝ)
-#check (abs_add_le a b : |a + b| ≤ |a| + |b|)
-#check (abs_sub_comm a b : |a - b| = |b - a|)
-#check (abs_sub_pos : 0 < |a - b| ↔ a ≠ b)
-#check (add_halves a : a / 2 + a / 2 = a)
-#check (add_lt_add : a < b → c < d → a + c < b + d)
-#check (add_zero a : a + 0 = a)
-#check (congrArg f : a = b → f a = f b)
-#check (half_pos : a > 0 → a / 2 > 0)
-#check (le_max_left a b : a ≤ max a b)
-#check (le_max_right a b : b ≤ max a b)
-#check (lt_irrefl a : ¬a < a)
-#check (sub_ne_zero_of_ne : a ≠ b → a - b ≠ 0)
-#check (sub_self a : a - a = 0)
-
-end Lemas
--/
+example
+  (hL : SeqLim a L)
+  (hM : SeqLim a M)
+  : L = M :=
+by
+  have h1 : ∀ {x : ℝ}, SeqLim a x → Tendsto a atTop (𝓝 x) := by
+    intro x hx
+    -- x : ℝ
+    -- hx : SeqLim a x
+    -- ⊢ Tendsto a atTop (𝓝 x)
+    rw [Metric.tendsto_atTop]
+    -- ⊢ ∀ ε > 0, ∃ N, ∀ n ≥ N, dist (a n) x < ε
+    intro ε hε
+    -- ε : ℝ
+    -- hε : ε > 0
+    -- ⊢ ∃ N, ∀ n ≥ N, dist (a n) x < ε
+    obtain ⟨k, hk⟩ := hx ε hε
+    -- k : ℕ
+    -- hk : ∀ n ≥ k, |a n - x| < ε
+    exact ⟨k, fun n hn => by simpa [Real.dist_eq] using hk n hn⟩
+  exact tendsto_nhds_unique (h1 hL) (h1 hM)

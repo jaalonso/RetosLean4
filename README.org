@@ -24,3 +24,9 @@ Repositorio de ejercicios semanales de demostración en Lean 4.
 20. [[./RetosLean4/Reto_20.lean][Si aₙ → L y M es una cota superior de aₙ, entonces L ≤ M]].
 21. [[./RetosLean4/Reto_21.lean][Las subsucesiones tienen el mismo límite que la sucesión]].
 22. [[./RetosLean4/Reto_22.lean][Subsucesiones con límites distintos implican no convergencia]].
+23. [[./RetosLean4/Reto_23.lean][La sucesión constante aₙ = L converge a L]].
+24. [[./RetosLean4/Reto_24.lean][La sucesión 1, -1, 1, -1,... no es convergente (2ª versión)]].
+25. [[./RetosLean4/Reto_25.lean][Si la mezcla de dos sucesiones converge a L, entonces ambas convergen a L]].
+26. [[./RetosLean4/Reto_26.lean][Producto de una sucesión de límite cero por una acotada]].
+27. [[./RetosLean4/Reto_27.lean][Si aₙ → L y M es una cota inferior de aₙ, entonces M ≤ L]].
+28. [[./RetosLean4/Reto_28.lean][la sucesión aₙ = n no está acotada]].

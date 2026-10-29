@@ -164,3 +164,101 @@ by
 variable (x y : ℝ)
 #check (abs_abs_sub_abs_le x y : |(|x|) - (|y|)| ≤ |x - y|)
 -/
+
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución C1
+-- ===========
+
+example
+  (ha : SeqLim a L)
+  (hb : ∀ n, b n = |a n|)
+  : SeqLim b |L| :=
+by
+  intro ε hε
+  -- ε : ℝ
+  -- hε : ε > 0
+  -- ⊢ ∃ k, ∀ n ≥ k, |b n - |L|| < ε
+  obtain ⟨k, hk⟩ := ha ε hε
+  -- k : ℕ
+  -- hk : ∀ n ≥ k, |a n - L| < ε
+  refine ⟨k, fun n hn => ?_⟩
+  -- n : ℕ
+  -- hn : n ≥ k
+  -- ⊢ |b n - |L|| < ε
+  have h : |a n - L| < ε := hk n hn
+  rw [abs_lt] at h
+  -- h : -ε < a n - L ∧ a n - L < ε
+  obtain ⟨h3, h4⟩ := h
+  -- h3 : -ε < a n - L
+  -- h4 : a n - L < ε
+  rw [hb n, abs_lt]
+  -- ⊢ -ε < |a n| - |L| ∧ |a n| - |L| < ε
+  rcases abs_cases (a n) with ⟨h1, han⟩ | ⟨h1, han⟩
+  · -- h1 : |a n| = a n
+    -- han : 0 ≤ a n
+    rcases abs_cases L with ⟨h2, hL⟩ | ⟨h2, hL⟩
+    · -- h2 : |L| = L
+      -- hL : 0 ≤ L
+      constructor
+      · -- ⊢ -ε < |a n| - |L|
+        linarith
+      · -- ⊢ |a n| - |L| < ε
+        linarith
+    · -- h2 : |L| = -L
+      -- hL : L < 0
+      constructor
+      · -- ⊢ -ε < |a n| - |L|
+        linarith
+      · -- ⊢ |a n| - |L| < ε
+        linarith
+  · -- h1 : |a n| = -a n
+    -- han : a n < 0
+    rcases abs_cases L with ⟨h2, hL⟩ | ⟨h2, hL⟩
+    · -- h2 : |L| = L
+      -- hL : 0 ≤ L
+      constructor
+      · -- ⊢ -ε < |a n| - |L|
+        linarith
+      · -- ⊢ |a n| - |L| < ε
+        linarith
+    · -- h2 : |L| = -L
+      -- hL : L < 0
+      constructor
+      · -- ⊢ -ε < |a n| - |L|
+        linarith
+      · -- ⊢ |a n| - |L| < ε
+        linarith
+
+-- Solución C2
+-- ===========
+
+example
+  (ha : SeqLim a L)
+  (hb : ∀ n, b n = |a n|)
+  : SeqLim b |L| :=
+by
+  intro ε hε
+  -- ε : ℝ
+  -- hε : ε > 0
+  -- ⊢ ∃ k, ∀ n ≥ k, |b n - |L|| < ε
+  obtain ⟨k, hk⟩ := ha ε hε
+  -- k : ℕ
+  -- hk : ∀ n ≥ k, |a n - L| < ε
+  refine ⟨k, fun n hn => ?_⟩
+  -- n : ℕ
+  -- hn : n ≥ k
+  -- ⊢ |b n - |L|| < ε
+  have h : |a n - L| < ε := hk n hn
+  rw [abs_lt] at h
+  -- h : -ε < a n - L ∧ a n - L < ε
+  obtain ⟨h3, h4⟩ := h
+  -- h3 : -ε < a n - L
+  -- h4 : a n - L < ε
+  rw [hb n, abs_lt]
+  -- ⊢ -ε < |a n| - |L| ∧ |a n| - |L| < ε
+  rcases abs_cases (a n) with ⟨h1, _⟩ | ⟨h1, _⟩ <;>
+  rcases abs_cases L with ⟨h2, _⟩ | ⟨h2, _⟩ <;>
+  constructor <;>
+  linarith

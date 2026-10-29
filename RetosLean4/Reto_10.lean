@@ -163,17 +163,42 @@ by
   -- hk : ∀ n ≥ k, |a n - L| < |L| / 2
   refine ⟨k, fun _ _ => by grind⟩
 
--- Lemas usados
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución SC1
 -- ============
 
-/-
-variable (x y z : ℝ)
-#check (abs_add_le x y : |x + y| ≤ |x| + |y|)
-#check (abs_neg x : |(-x)| = |x|)
-#check (abs_pos : 0 < |x| ↔ x ≠ 0)
-#check (add_le_add_right : y ≤ z → ∀ x, x + y ≤ x + z)
-#check (half_pos : 0 < x → 0 < x / 2)
-#check (neg_sub x y : -(x - y) = y - x)
-#check (sub_half x : x - x / 2 = x / 2)
-#check (tsub_le_iff_right : x - y ≤ z ↔ x ≤ z + y)
--/
+open Filter Topology
+
+example
+  (ha : SeqLim a L)
+  (hL : L ≠ 0)
+  : ∃ k, ∀ n ≥ k, |a n| ≥ |L| / 2 :=
+by
+  have h1 : Tendsto a atTop (𝓝 L) := by
+    rw [Metric.tendsto_atTop]
+    -- ⊢ ∀ ε > 0, ∃ N, ∀ n ≥ N, dist (a n) L < ε
+    intro ε hε
+    -- ε : ℝ
+    -- hε : ε > 0
+    -- ⊢ ∃ N, ∀ n ≥ N, dist (a n) L < ε
+    obtain ⟨k, hk⟩ := ha ε hε
+    -- k : ℕ
+    -- hk : ∀ n ≥ k, |a n - L| < ε
+    -- exact ⟨k, fun n hn => by simpa [Real.dist_eq] using hk n hn⟩
+    use k
+    -- ⊢ ∀ n ≥ k, dist (a n) L < ε
+    intro n hn
+    -- n : ℕ
+    -- hn : n ≥ k
+    -- ⊢ dist (a n) L < ε
+    simp [Real.dist_eq]
+    -- ⊢ |a n - L| < ε
+    exact hk n hn
+  have h2 : Tendsto (fun n => |a n|) atTop (𝓝 |L|) := h1.abs
+  have h3 : |L| / 2 < |L| := half_lt_self (abs_pos.mpr hL)
+  obtain ⟨k, hk⟩ := eventually_atTop.mp (h2.eventually (lt_mem_nhds h3))
+  -- k : ℕ
+  -- hk : ∀ (b : ℕ), k ≤ b → |L| / 2 < |a b|
+  exact ⟨k, fun n hn => (hk n hn).le⟩
