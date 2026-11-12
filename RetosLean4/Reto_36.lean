@@ -1,4 +1,4 @@
-- Reto_36.lean
+-- Reto_36.lean
 -- Crecimiento de los huecos de las sucesiones monótonas que no son de Cauchy.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 6-noviembre-2026

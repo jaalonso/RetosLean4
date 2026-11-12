@@ -1,33 +1,43 @@
 -- Reto_37.lean
--- Si una sucesión es de Cauchy, entonces su opuesta también lo es.
+-- Las sucesiones monótonas y acotadas superiormente son de Cauchy.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
--- Sevilla, 11-noviembre-2026
+-- Sevilla, 6-noviembre-2026
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
--- Demostrar que si una sucesión es de Cauchy, entonces su opuesta
--- también lo es.
+-- Demostrar que si a es una sucesión monótona y acotada
+-- superiormente, entonces a es de Cauchy.
 -- ---------------------------------------------------------------
 
 -- Demostración en lenguaje natural
 -- ================================
 
--- Supongamos que la sucesión a es de Cauchy. Tenemos que
--- demostrar que -a también lo es. Para ello, sea ε > 0. Tenemos
--- que demostrar que existe un k ∈ ℕ tal que
---    ∀ n ≥ k, ∀ m ≥ n, |(-a)(m) - (-a)(n)| < ε                 (1)
+-- Sea a monótona y acotada superiormente. Lo demostraremos por
+-- reducción al absurdo: supongamos que a no es de
+-- Cauchy y lleguemos a una contradicción.
 --
--- Puesto que a es de Cauchy, existe un k ∈ ℕ tal que
---    ∀ n ≥ k, ∀ m ≥ n, |a(m) - a(n)| < ε                       (2)
--- Veamos que con el mismo k se verifica la condición (1). Para
--- ello, sean n y m tales que
---    n ≥ k                                                     (3)
---    m ≥ n                                                     (4)
--- Entonces
---    |(-a)(m) - (-a)(n)| = |(-a(m)) - (-a(n))|
---                        = |-(a(m) - a(n))|
---                        = |a(m) - a(n)|
---                        < ε                  [por (2), (3) y (4)]
+-- Por estar a acotada superiormente, existe un M tal que
+--    ∀ n, a(n) ≤ M                                             (1)
+-- Por el lema del crecimiento lineal de los huecos de las
+-- sucesiones monótonas que no son de Cauchy (del Reto 36),
+-- existen ε y σ tales que
+--    0 < ε
+--    ∀ k, k · ε ≤ a(σᵏ(0)) - a(0)                              (2)
+-- Por la propiedad arquimediana, existe k ∈ ℕ tal que
+--    M - a(0) < k · ε                                          (3)
+-- Para obtener una contradicción, demostraremos que
+--    M < M
+-- En efecto,
+--    M = (M - a(0)) + a(0)          [por álgebra]
+--      < k · ε + a(0)               [por (3)]
+--      ≤ (a(σᵏ(0)) - a(0)) + a(0)   [por (2)]
+--      = a(σᵏ(0))                   [por álgebra]
+--      ≤ M                          [por (1)]
+--
+-- Variante. En lugar de la propiedad arquimediana se puede usar la
+-- función suelo: basta tomar
+--    k = ⌊(M - a(0)) / ε⌋ + 1
+-- ya que entonces (M - a(0)) / ε < k y, por tanto, se cumple (3).
 
 -- Demostraciones en Lean 4
 -- ========================
@@ -35,84 +45,153 @@
 module
 
 public import Mathlib.Tactic
-public import RetosLean4.Defs -- IsCauchy
+public import RetosLean4.Defs -- IsCauchy, SeqBddAbove
+public import RetosLean4.Reto_36 -- exists_linear_growth
 
-variable {X : Type*} [NormedField X] [Lattice X]
+variable {X : Type*} [Field X]
+                     [LinearOrder X]
+                     [IsStrictOrderedRing X]
+                     [Archimedean X]
 variable {a : ℕ → X}
 
 -- 1ª demostración
 -- ===============
 
 example
-  (ha : IsCauchy a)
-  : IsCauchy (-a) :=
+  (h1 : Monotone a)
+  (h2 : SeqBddAbove a)
+  : IsCauchy a :=
 by
-  intro ε hε
+  by_contra hC
+  -- hC : ¬IsCauchy a
+  -- ⊢ False
+  obtain ⟨M, hM⟩ := h2
+  -- M : X
+  -- hM : ∀ (n : ℕ), a n ≤ M
+  obtain ⟨ε, σ, hε, hσ⟩ :=
+    exists_linear_growth h1 hC
   -- ε : X
+  -- σ : ℕ → ℕ
   -- hε : 0 < ε
-  -- ⊢ ∃ k, ∀ n ≥ k, ∀ m ≥ n, |(-a) m - (-a) n| < ε
-  obtain ⟨k, hk⟩ := ha ε hε
+  -- hσ : ∀ (k : ℕ), ↑k * ε ≤ a (σ^[k] 0) - a 0
+  obtain ⟨k, hk⟩ := exists_lt_nsmul hε (M - a 0)
   -- k : ℕ
-  -- hk : ∀ n ≥ k, ∀ m ≥ n, |a m - a n| < ε
-  use k
-  -- ⊢ ∀ n ≥ k, ∀ m ≥ n, |(-a) m - (-a) n| < ε
-  intro n hn m hm
-  -- n : ℕ
-  -- hn : n ≥ k
-  -- m : ℕ
-  -- hm : m ≥ n
-  -- ⊢ |(-a) m - (-a) n| < ε
-  calc |(-a) m - (-a) n|
-       = |(- a m) - (- a n)| := rfl
-     _ = |-(a m - a n)|      := by ring_nf
-     _ = |a m - a n|         := abs_neg _
-     _ < ε                   := hk n hn m hm
+  -- hk : M - a 0 < k • ε
+  rw [nsmul_eq_mul] at hk
+  -- hk : M - a 0 < ↑k * ε
+  linarith [hσ k, hM (σ^[k] 0)]
 
 -- 2ª demostración
 -- ===============
 
-public theorem isCauchy_neg
-  (ha : IsCauchy a)
-  : IsCauchy (-a) :=
+example
+  (h1 : Monotone a)
+  (h2 : SeqBddAbove a)
+  : IsCauchy a :=
 by
-  intro ε hε
+  by_contra hC
+  -- hC : ¬IsCauchy a
+  -- ⊢ False
+  obtain ⟨M, hM⟩ := h2
+  -- M : X
+  -- hM : ∀ (n : ℕ), a n ≤ M
+  obtain ⟨ε, σ, hε, hσ⟩ :=
+    exists_linear_growth h1 hC
   -- ε : X
+  -- σ : ℕ → ℕ
   -- hε : 0 < ε
-  -- ⊢ ∃ k, ∀ n ≥ k, ∀ m ≥ n, |(-a) m - (-a) n| < ε
-  obtain ⟨k, hk⟩ := ha ε hε
+  -- hσ : ∀ (k : ℕ), ↑k * ε ≤ a (σ^[k] 0) - a 0
+  obtain ⟨k, hk⟩ := exists_lt_nsmul hε (M - a 0)
   -- k : ℕ
-  -- hk : ∀ n ≥ k, ∀ m ≥ n, |a m - a n| < ε
-  refine ⟨k, fun n hn m hm => ?_⟩
-  -- n : ℕ
-  -- hn : n ≥ k
-  -- m : ℕ
-  -- hm : m ≥ n
-  -- ⊢ |(-a) m - (-a) n| < ε
-  calc |(-a) m - (-a) n|
-       = |(- a m) - (- a n)| := rfl
-     _ = |-(a m - a n)|      := congrArg abs (neg_sub' (a m) (a n)).symm
-     _ = |a m - a n|         := abs_neg (a m - a n)
-     _ < ε                   := hk n hn m hm
+  -- hk : M - a 0 < k • ε
+  rw [nsmul_eq_mul] at hk
+  -- hk : M - a 0 < ↑k * ε
+  apply lt_irrefl M
+  -- ⊢ M < M
+  calc M
+       = (M - a 0) + a 0 :=
+           (sub_add_cancel M (a 0)).symm
+     _ < k * ε + a 0 :=
+           by linarith
+     _ ≤ (a (σ^[k] 0) - a 0) + a 0 :=
+           by linarith [hσ k]
+     _ = a (σ^[k] 0) :=
+           sub_add_cancel (a (σ^[k] 0)) (a 0)
+     _ ≤ M :=
+           hM (σ^[k] 0)
 
 -- 3ª demostración
 -- ===============
 
-example
-  (ha : IsCauchy a)
-  : IsCauchy (-a) :=
+public theorem isCauchy_of_mono_bddAbove
+  (h1 : Monotone a)
+  (h2 : SeqBddAbove a)
+  : IsCauchy a :=
 by
-  intro ε hε
+  by_contra hC
+  -- hC : ¬IsCauchy a
+  -- ⊢ False
+  obtain ⟨M, hM⟩ := h2
+  -- M : X
+  -- hM : ∀ (n : ℕ), a n ≤ M
+  obtain ⟨ε, σ, hε, hσ⟩ :=
+    exists_linear_growth h1 hC
   -- ε : X
+  -- σ : ℕ → ℕ
   -- hε : 0 < ε
-  -- ⊢ ∃ k, ∀ n ≥ k, ∀ m ≥ n, |(-a) m - (-a) n| < ε
-  obtain ⟨k, hk⟩ := ha ε hε
+  -- hσ : ∀ (k : ℕ), ↑k * ε ≤ a (σ^[k] 0) - a 0
+  obtain ⟨k, hk⟩ := exists_nat_gt ((M - a 0) / ε)
   -- k : ℕ
-  -- hk : ∀ n ≥ k, ∀ m ≥ n, |a m - a n| < ε
-  refine ⟨k, fun n hn m hm ↦ ?_⟩
-  -- n : ℕ
-  -- hn : n ≥ k
-  -- m : ℕ
-  -- hm : m ≥ n
-  -- ⊢ |(-a) m - (-a) n| < ε
-  rw [Pi.neg_apply, Pi.neg_apply, neg_sub_neg, abs_sub_comm]
-  exact hk n hn m hm
+  -- hk : (M - a 0) / ε < ↑k
+  have h3 : M - a 0 < k * ε := (div_lt_iff₀ hε).mp hk
+  apply lt_irrefl M
+  -- ⊢ M < M
+  calc M
+       = (M - a 0) + a 0 :=
+           (sub_add_cancel M (a 0)).symm
+     _ < k * ε + a 0 :=
+           by linarith
+     _ ≤ (a (σ^[k] 0) - a 0) + a 0 :=
+           by linarith [hσ k]
+     _ = a (σ^[k] 0) :=
+           sub_add_cancel (a (σ^[k] 0)) (a 0)
+     _ ≤ M :=
+           hM (σ^[k] 0)
+
+-- 4ª demostración
+-- ===============
+
+example
+  [FloorSemiring X]
+  (h1 : Monotone a)
+  (h2 : SeqBddAbove a)
+  : IsCauchy a :=
+by
+  by_contra hC
+  -- hC : ¬IsCauchy a
+  -- ⊢ False
+  obtain ⟨M, hM⟩ := h2
+  -- M : X
+  -- hM : ∀ (n : ℕ), a n ≤ M
+  obtain ⟨ε, σ, hε, hσ⟩ :=
+    exists_linear_growth h1 hC
+  -- ε : X
+  -- σ : ℕ → ℕ
+  -- hε : 0 < ε
+  -- hσ : ∀ (k : ℕ), ↑k * ε ≤ a (σ^[k] 0) - a 0
+  set k := ⌊(M - a 0) / ε⌋₊ + 1
+  have h3 : (M - a 0) / ε < k := Nat.lt_succ_floor ((M - a 0) / ε)
+  have h4 : M - a 0 < k * ε := (div_lt_iff₀ hε).mp h3
+  apply lt_irrefl M
+  -- ⊢ M < M
+  calc M
+       = (M - a 0) + a 0 :=
+           (sub_add_cancel M (a 0)).symm
+     _ < k * ε + a 0 :=
+           by linarith
+     _ ≤ (a (σ^[k] 0) - a 0) + a 0 :=
+           by linarith [hσ k]
+     _ = a (σ^[k] 0) :=
+           sub_add_cancel (a (σ^[k] 0)) (a 0)
+     _ ≤ M :=
+           hM (σ^[k] 0)
