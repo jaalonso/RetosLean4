@@ -28,9 +28,6 @@ def IsUB (a : ℕ → ℝ) (M : ℝ) : Prop :=
 def IsCauchy {X : Type*} [AddGroup X] [Lattice X] (a : ℕ → X) : Prop :=
   ∀ (ε : X), 0 < ε → ∃ N : ℕ, ∀ n ≥ N, ∀ m ≥ N, |a m - a n| < ε
 
-def IsCauchy2 {X : Type*} [AddGroup X] [Lattice X] (a : ℕ → X) : Prop :=
-  ∀ (ε : X), 0 < ε → ∃ N : ℕ, ∀ n ≥ N, ∀ m ≥ n, |a m - a n| < ε
-
 -- φ es una función de extracción.
 def IsExtraction (φ : ℕ → ℕ) : Prop :=
   StrictMono φ
