@@ -152,3 +152,32 @@ variable (k m : ℕ)
 #check (one_le_two : 1 ≤ 2)
 #check (pow_le_pow_right'  : 1 ≤ k → n ≤ m → k ^ n ≤ k ^ m)
 -/
+
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución C1
+-- ===========
+
+example : 2 * n + 9 ≤ 2 ^ (n + 4) :=
+by
+  have h1 : n < 2 ^ n := Nat.lt_two_pow_self
+  have h2 : 2 ^ (n + 4) = 16 * 2 ^ n := by ring
+  rw [h2]
+  -- ⊢ 2 * n + 9 ≤ 16 * 2 ^ n
+  omega
+
+-- Solución C2
+-- ===========
+
+example : 2 * n + 9 ≤ 2 ^ (n + 4) :=
+by
+  have h1 : n < 2 ^ n := Nat.lt_two_pow_self
+  have h2 : n ≤ 2 ^ n - 1 := by omega
+  calc 2 * n + 9
+       ≤ 2 * (2 ^ n - 1) + 9    := by omega
+     _ = 2 * 2 ^ n + 7          := by omega
+     _ ≤ 2 * 2 ^ n + 7 * 2 ^ n  := by omega
+     _ = 9 * 2 ^ n              := by omega
+     _ ≤ 16 * 2 ^ n             := by omega
+     _ = 2 ^ (n + 4)            := by ring

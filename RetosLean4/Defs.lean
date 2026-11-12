@@ -25,8 +25,11 @@ def IsUB (a : ℕ → ℝ) (M : ℝ) : Prop :=
   ∀ n, a n ≤ M
 
 -- a es una sucesión de Cauchy.
-def IsCauchy (a : ℕ → ℝ) : Prop :=
-  ∀ ε > 0, ∃ N : ℕ, ∀ p ≥ N, ∀ q ≥ N, |a p - a q| < ε
+def IsCauchy {X : Type*} [AddGroup X] [Lattice X] (a : ℕ → X) : Prop :=
+  ∀ (ε : X), 0 < ε → ∃ N : ℕ, ∀ n ≥ N, ∀ m ≥ N, |a m - a n| < ε
+
+def IsCauchy2 {X : Type*} [AddGroup X] [Lattice X] (a : ℕ → X) : Prop :=
+  ∀ (ε : X), 0 < ε → ∃ N : ℕ, ∀ n ≥ N, ∀ m ≥ n, |a m - a n| < ε
 
 -- φ es una función de extracción.
 def IsExtraction (φ : ℕ → ℕ) : Prop :=
@@ -35,3 +38,7 @@ def IsExtraction (φ : ℕ → ℕ) : Prop :=
 -- v es una subsucesión de u.
 def Subseq (v u : ℕ → ℝ) : Prop :=
   ∃ φ, IsExtraction φ ∧ v = u ∘ φ
+
+-- a es una sucesión acotadas superiormente.
+def SeqBddAbove {X : Type*} [LE X] (a : ℕ → X) : Prop :=
+  ∃ M : X, ∀ n, a n ≤ M

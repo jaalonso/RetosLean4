@@ -147,3 +147,30 @@ variable (f : ℝ → ℝ)
 #check (sub_le_sub_right : x ≤ y → ∀ z, x - z ≤ y - z)
 #check (sub_sub_self x y : x - (x - y) = y)
 -/
+
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución C1
+-- ===========
+
+example : |(|x| - |y|)| ≤ |x - y| :=
+by
+  rw [← sq_le_sq]
+  -- ⊢ (|x| - |y|) ^ 2 ≤ (x - y) ^ 2
+  calc (|x| - |y|)^2
+       = |x| ^ 2 - 2 * |x| * |y| + |y| ^ 2 := by grind
+     _ = x ^ 2 - 2 * |x * y| + y ^ 2       := by grind
+     _ ≤ x ^ 2 - 2 * x * y + y ^ 2         := by grind
+     _ = (x - y) ^ 2                       := by grind
+
+-- Solución C2
+-- ===========
+
+example : |(|x| - |y|)| ≤ |x - y| :=
+by
+  rcases abs_cases x with ⟨hx, hx'⟩ | ⟨hx, hx'⟩ <;>
+  rcases abs_cases y with ⟨hy, hy'⟩ | ⟨hy, hy'⟩ <;>
+  rcases abs_cases (x - y) with ⟨hxy, hxy'⟩ | ⟨hxy, hxy'⟩ <;>
+  rcases abs_cases (|x| - |y|) with ⟨h, h'⟩ | ⟨h, h'⟩ <;>
+  linarith

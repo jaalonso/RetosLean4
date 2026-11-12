@@ -29,4 +29,6 @@ Repositorio de ejercicios semanales de demostración en Lean 4.
 25. [[./RetosLean4/Reto_25.lean][Si la mezcla de dos sucesiones converge a L, entonces ambas convergen a L]].
 26. [[./RetosLean4/Reto_26.lean][Producto de una sucesión de límite cero por una acotada]].
 27. [[./RetosLean4/Reto_27.lean][Si aₙ → L y M es una cota inferior de aₙ, entonces M ≤ L]].
-28. [[./RetosLean4/Reto_28.lean][la sucesión aₙ = n no está acotada]].
+28. [[./RetosLean4/Reto_28.lean][La sucesión aₙ = n no está acotada]].
+29. [[./RetosLean4/Reto_29.lean][Suma de sucesiones de Cauchy]].
+30. [[./RetosLean4/Reto_29.lean][Las sucesiones de Cauchy están acotadas]].

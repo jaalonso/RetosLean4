@@ -12,20 +12,20 @@
 
 -- Sea ε ∈ ℝ tal que ε > 0. Tenemos que demostrar que existe un
 -- k ∈ ℕ tal que
---    ∀ p ≥ k, ∀ q ≥ k, |u(p) - u(q)| < ε                      (1)
+--    ∀ n ≥ N, ∀ m ≥ N, |u(m) - u(n)| < ε                      (1)
 --
 -- Puesto que u es convergente, existe un a ∈ ℝ tal que el límite
--- de u es a. Por tanto, existe un k ∈ ℕ tal que
---    ∀ n ≥ k, |u(n) - a| < ε/2                                (2)
+-- de u es a. Por tanto, existe un N ∈ ℕ tal que
+--    ∀ n ≥ N, |u(n) - a| < ε/2                                (2)
 --
--- Para demostrar que con dicho k se cumple (1), sean p, q ∈ ℕ
--- tales que p ≥ k y q ≥ k. Entonces, por (2), se tiene que
---    |u(p) - a| < ε/2                                         (3)
---    |u(q) - a| < ε/2                                         (4)
+-- Para demostrar que con dicho N se cumple (1), sean n, m ∈ ℕ
+-- tales que n ≥ N y m ≥ N. Entonces, por (2), se tiene que
+--    |u(n) - a| < ε/2                                         (3)
+--    |u(m) - a| < ε/2                                         (4)
 -- Por tanto,
---    |u(p) - u(q)| = |(u(p) - a) + (a - u(q))|
---                  ≤ |u(p) - a|  + |a - u(q)|
---                  = |u(p) - a|  + |u(q) - a|
+--    |u(m) - u(m)| = |(u(m) - a) + (a - u(m))|
+--                  ≤ |u(m) - a|  + |a - u(m)|
+--                  = |u(m) - a|  + |u(m) - a|
 --                  < ε/2 + ε/2                    [por (3) y (4)]
 --                  = ε
 
@@ -50,21 +50,21 @@ by
   intros ε hε
   -- ε : ℝ
   -- hε : ε > 0
-  -- ⊢ ∃ k, ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
+  -- ⊢ ∃ N, ∀ n ≥ N, ∀ m ≥ N, |u m - u n| < ε
   obtain ⟨a, ha⟩ := h
   -- a : ℝ
   -- ha : SeqLim u a
-  obtain ⟨k, hk⟩ := ha (ε/2) (by grind)
-  -- k : ℕ
-  -- hk : ∀ n ≥ k, |u n - a| < ε / 2
-  use k
-  -- ⊢ ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
-  intros p hp q hq
-  -- p : ℕ
-  -- hp : p ≥ k
-  -- q : ℕ
-  -- hq : q ≥ k
-  -- ⊢ |u p - u q| < ε
+  obtain ⟨N, hN⟩ := ha (ε/2) (by grind)
+  -- N : ℕ
+  -- hN : ∀ n ≥ N, |u n - a| < ε / 2
+  use N
+  -- ⊢ ∀ n ≥ N, ∀ m ≥ N, |u m - u n| < ε
+  intros n hn m hm
+  -- n : ℕ
+  -- hn : n ≥ N
+  -- m : ℕ
+  -- hm : m ≥ N
+  -- ⊢ |u m - u n| < ε
   grind
 
 -- 2ª demostración
@@ -76,26 +76,26 @@ example
 by
   intros ε hε
   -- ε : ℝ
-  -- hε : ε > 0
-  -- ⊢ ∃ k, ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
+  -- hε : 0 < ε
+  -- ⊢ ∃ N, ∀ n ≥ N, ∀ m ≥ N, |u m - u n| < ε
   obtain ⟨a, ha⟩ := h
   -- a : ℝ
   -- ha : SeqLim u a
-  obtain ⟨k, hk⟩ := ha (ε/2) (by grind)
-  -- k : ℕ
-  -- hk : ∀ n ≥ k, |u n - a| < ε / 2
-  use k
-  -- ⊢ ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
-  intros p hp q hq
-  -- p : ℕ
-  -- hp : p ≥ k
-  -- q : ℕ
-  -- hq : q ≥ k
-  -- ⊢ |u p - u q| < ε
-  calc |u p - u q|
-       = |(u p - a) + (a - u q)| := by grind
-     _ ≤ |u p - a|  + |a - u q|  := by grind
-     _ = |u p - a|  + |u q - a|  := by grind
+  obtain ⟨N, hN⟩ := ha (ε/2) (by grind)
+  -- N : ℕ
+  -- hN : ∀ n ≥ N, |u n - a| < ε / 2
+  use N
+  -- ⊢ ∀ n ≥ N, ∀ m ≥ N, |u m - u n| < ε
+  intros n hn m hm
+  -- n : ℕ
+  -- hn : n ≥ N
+  -- m : ℕ
+  -- hm : m ≥ N
+  -- ⊢ |u m - u n| < ε
+  calc |u m - u n|
+       = |(u m - a) + (a - u n)| := by grind
+     _ ≤ |u m - a|  + |a - u n|  := by grind
+     _ = |u m - a|  + |u n - a|  := by grind
      _ < ε                       := by grind
 
 -- 3ª demostración
@@ -107,28 +107,28 @@ example
 by
   intros ε hε
   -- ε : ℝ
-  -- hε : ε > 0
-  -- ⊢ ∃ k, ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
+  -- hε : 0 < ε
+  -- ⊢ ∃ N, ∀ n ≥ N, ∀ m ≥ N, |u m - u n| < ε
   obtain ⟨a, ha⟩ := h
   -- a : ℝ
   -- ha : SeqLim u a
-  obtain ⟨k, hk⟩ := ha (ε/2) (by positivity)
-  -- k : ℕ
-  -- hk : ∀ n ≥ k, |u n - a| < ε / 2
-  use k
-  -- ⊢ ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
-  intros p hp q hq
-  -- p : ℕ
-  -- hp : p ≥ k
-  -- q : ℕ
-  -- hq : q ≥ k
-  -- ⊢ |u p - u q| < ε
-  have h1 : |u p - a| < ε / 2 := hk p hp
-  have h2 : |u q - a| < ε / 2 := hk q hq
-  calc |u p - u q|
-       = |(u p - a) + (a - u q)| := by ring_nf
-     _ ≤ |u p - a| + |a - u q|   := abs_add_le _ _
-     _ = |u p - a| + |u q - a|   := by simp [abs_sub_comm]
+  obtain ⟨N, hN⟩ := ha (ε/2) (by positivity)
+  -- N : ℕ
+  -- hN : ∀ n ≥ N, |u n - a| < ε / 2
+  use N
+  -- ⊢ ∀ n ≥ N, ∀ m ≥ n, |u m - u n| < ε
+  intros n hn m hm
+  -- n : ℕ
+  -- hn : n ≥ N
+  -- m : ℕ
+  -- hm : m ≥ N
+  -- ⊢ |u m - u n| < ε
+  have h1 : |u n - a| < ε / 2 := hN n hn
+  have h2 : |u m - a| < ε / 2 := hN m hm
+  calc |u m - u n|
+       = |(u m - a) + (a - u n)| := by ring_nf
+     _ ≤ |u m - a| + |a - u n|   := abs_add_le _ _
+     _ = |u m - a| + |u n - a|   := by simp [abs_sub_comm]
      _ < ε / 2 + ε / 2           := by gcongr
      _ = ε                       := by ring
 
@@ -141,31 +141,31 @@ example
 by
   intros ε hε
   -- ε : ℝ
-  -- hε : ε > 0
-  -- ⊢ ∃ k, ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
+  -- hε : 0 < ε
+  -- ⊢ ∃ N, ∀ n ≥ N, ∀ m ≥ N, |u m - u n| < ε
   obtain ⟨a, ha⟩ := h
   -- a : ℝ
   -- ha : SeqLim u a
-  obtain ⟨k, hk⟩ := ha (ε/2) (half_pos hε)
-  -- k : ℕ
-  -- hk : ∀ n ≥ k, |u n - a| < ε / 2
-  use k
-  -- ⊢ ∀ p ≥ k, ∀ q ≥ k, |u p - u q| < ε
-  intros p hp q hq
-  -- p : ℕ
-  -- hp : p ≥ k
-  -- q : ℕ
-  -- hq : q ≥ k
-  -- ⊢ |u p - u q| < ε
-  calc |u p - u q|
-       = |(u p - a) + (a - u q)| :=
-           congrArg abs (sub_add_sub_cancel (u p) a (u q)).symm
-     _ ≤ |u p - a|  + |a - u q| :=
-           abs_add_le (u p - a) (a - u q)
-     _ = |u p - a|  + |u q - a| :=
-           congrArg (|u p - a| + ·) (abs_sub_comm a (u q))
+  obtain ⟨N, hN⟩ := ha (ε/2) (half_pos hε)
+  -- N : ℕ
+  -- hN : ∀ n ≥ N, |u n - a| < ε / 2
+  use N
+  -- ⊢ ∀ n ≥ N, ∀ m ≥ N, |u m - u n| < ε
+  intros n hn m hm
+  -- n : ℕ
+  -- hn : n ≥ N
+  -- m : ℕ
+  -- hm : m ≥ N
+  -- ⊢ |u m - u n| < ε
+  calc |u m - u n|
+       = |(u m - a) + (a - u n)| :=
+           congrArg abs (sub_add_sub_cancel (u m) a (u n)).symm
+     _ ≤ |u m - a|  + |a - u n| :=
+           abs_add_le (u m - a) (a - u n)
+     _ = |u m - a|  + |u n - a| :=
+           congrArg (|u m - a| + ·) (abs_sub_comm a (u n))
      _ < ε / 2 + ε / 2 :=
-           add_lt_add (hk p hp) (hk q hq)
+           add_lt_add (hN m hm) (hN n hn)
      _ = ε :=
            add_halves ε
 

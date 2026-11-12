@@ -72,7 +72,7 @@ module
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- SeqLim, SeqConv, SeqBdd
+public import RetosLean4.Defs -- SeqLim, SeqConv, SeqBdd
 
 open Finset
 
@@ -392,7 +392,7 @@ lemma Challenge17_L2
 -- Demostraciones del ejercicio
 -- ============================
 
-example
+public theorem seqBdd_of_seqConv
   (ha : SeqConv a) :
   SeqBdd a :=
 by
@@ -411,7 +411,11 @@ by
   -- ⊢ M > 0 ∧ ∀ (n : ℕ), |a n| ≤ M
   constructor
   · -- ⊢ M > 0
-    grind
+    calc M
+         ≥ |L| + 1 := le_max_left (|L| + 1) C
+       _ ≥ 0 + 1   := add_le_add_left (abs_nonneg L) 1
+       _ = 1       := zero_add 1
+       _ > 0       := Real.zero_lt_one
   · intro n
     -- n : ℕ
     -- ⊢ |a n| ≤ M

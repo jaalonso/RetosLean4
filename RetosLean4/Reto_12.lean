@@ -203,3 +203,34 @@ by
   obtain ⟨k1, hk1⟩ := ha ε (by grind)
   obtain ⟨k2, hk2⟩ := hb ε (by grind)
   exact ⟨max k1 k2, fun _ _ => by grind⟩
+
+-- Soluciones colaborativas
+-- ========================
+
+-- Solución C1
+-- ===========
+
+example
+  (ha : SeqLim a L)
+  (hb : SeqLim b M)
+  (hLM : L < M)
+  : ∃ k, ∀ n ≥ k, a n < b n :=
+by
+  set c := (L + M) / 2 with hc
+  -- c : ℝ
+  -- hc : c = (L + M) / 2
+  obtain ⟨k1, hk1⟩ := ha (c - L) (by linarith)
+  -- k1 : ℕ
+  -- hk1 : ∀ n ≥ k1, |a n - L| < c - L
+  obtain ⟨k2, hk2⟩ := hb (M - c) (by linarith)
+  -- k2 : ℕ
+  -- hk2 : ∀ n ≥ k2, |b n - M| < M - c
+  refine ⟨max k1 k2, fun n hn => ?_⟩
+  -- n : ℕ
+  -- hn : n ≥ max k1 k2
+  -- ⊢ a n < b n
+  have h1 : a n - L < c - L :=
+    (abs_lt.mp (hk1 n (le_of_max_le_left hn))).2
+  have h2 : -(M - c) < b n - M :=
+    (abs_lt.mp (hk2 n (le_of_max_le_right hn))).1
+  linarith
