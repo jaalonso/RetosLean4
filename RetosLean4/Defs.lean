@@ -36,6 +36,10 @@ def IsExtraction (φ : ℕ → ℕ) : Prop :=
 def Subseq (v u : ℕ → ℝ) : Prop :=
   ∃ φ, IsExtraction φ ∧ v = u ∘ φ
 
--- a es una sucesión acotadas superiormente.
+-- a es una sucesión acotada superiormente.
 def SeqBddAbove {X : Type*} [LE X] (a : ℕ → X) : Prop :=
   ∃ M : X, ∀ n, a n ≤ M
+
+-- a es una sucesión acotada superiormente.
+def SeqBddBelow {X : Type*} [LE X] (a : ℕ → X) : Prop :=
+  ∃ M : X, ∀ n, M ≤ a n

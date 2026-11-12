@@ -37,7 +37,7 @@ module
 public import Mathlib.Tactic
 public import RetosLean4.Defs -- IsCauchy
 
-variable {X : Type*} [NormedField X] [Lattice X]
+variable {X : Type*} [AddCommGroup X] [Lattice X]
 variable {a : ℕ → X}
 
 -- 1ª demostración
@@ -64,7 +64,7 @@ by
   -- ⊢ |(-a) m - (-a) n| < ε
   calc |(-a) m - (-a) n|
        = |(- a m) - (- a n)| := rfl
-     _ = |-(a m - a n)|      := by ring_nf
+     _ = |-(a m - a n)|      := by rw [neg_sub']
      _ = |a m - a n|         := abs_neg _
      _ < ε                   := hN n hn m hm
 

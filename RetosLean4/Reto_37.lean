@@ -5,8 +5,8 @@
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
--- Demostrar que si a es una sucesión monótona y acotada
--- superiormente, entonces a es de Cauchy.
+-- Demostrar que kas sucesiones monótonas y acotadas superiormente
+-- son sucesiones de Cauchy.
 -- ---------------------------------------------------------------
 
 -- Demostración en lenguaje natural
