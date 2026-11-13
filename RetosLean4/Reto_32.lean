@@ -9,25 +9,9 @@
 -- estrictamente creciente; es decir, si
 --    ∀ i j ∈ ℕ, i < j → φ(i) < φ(j)
 --
--- Demostrar que, para comprobar que φ es una función de
--- extracción, basta con verificar que cada término es menor que el
--- siguiente; es decir,
---    ∀ n ∈ ℕ, φ(n) < φ(n+1)
---
--- Para ello, completar la siguiente teoría en Lean 4:
---    import Mathlib.Basic.Real.Basic
---
---    def IsExtraction (φ : ℕ → ℕ) : Prop :=
---      StrictMono φ
---
---    variable (φ : ℕ → ℕ)
-
---    example
---      (φ : ℕ → ℕ)
---      (hφ : ∀ n, φ n < φ (n + 1)) :
---      IsExtraction φ :=
---    by
---      sorry
+-- Demostrar que si
+--    ∀ n, φ(n) < φ (n+1),
+-- entonces φ es una función de extracción.
 -- ---------------------------------------------------------------
 
 -- Demostraciones en lenguaje natural
