@@ -50,9 +50,9 @@
 
 module
 
-import Mathlib.Basic.Real.Basic
+public import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- SeqLim
+public import RetosLean4.Defs -- SeqLim
 
 variable (a : ℕ → ℝ)
 
@@ -207,7 +207,7 @@ end Solucion2
 -- Solución C1
 -- ===========
 
-example
+public theorem seqLim_zero_of_eq_one_div
   (ha : ∀ n, a n = 1 / n)
   : SeqLim a 0 :=
 by
