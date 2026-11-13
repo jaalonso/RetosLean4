@@ -32,3 +32,12 @@ Repositorio de ejercicios semanales de demostración en Lean 4.
 28. [[./RetosLean4/Reto_28.lean][La sucesión aₙ = n no está acotada]].
 29. [[./RetosLean4/Reto_29.lean][Suma de sucesiones de Cauchy]].
 30. [[./RetosLean4/Reto_29.lean][Las sucesiones de Cauchy están acotadas]].
+31. [[./RetosLean4/Reto_31.lean][La sucesión identidad no tiene subsucesiones convergentes]].
+32. [[./RetosLean4/Reto_32.lean][Criterio del sucesor para funciones de extracción]].
+33. [[./RetosLean4/Reto_33.lean][La órbita de una función que crece más que la identidad es una extracción]].
+34. [[./RetosLean4/Reto_34.lean][Si P se cumple para números arbitrariamente grandes, existe una extracción a lo largo de la cual P siempre se cumple]].
+35. [[./RetosLean4/Reto_35.lean][Existencia de huecos ordenados en sucesiones que no son de Cauchy]].
+36. [[./RetosLean4/Reto_36.lean][Crecimiento de los huecos de las sucesiones monótonas que no son de Cauchy]].
+37. [[./RetosLean4/Reto_37.lean][Las sucesiones monótonas y acotadas superiormente son de Cauchy]].
+38. [[./RetosLean4/Reto_38.lean][Si una sucesión es de Cauchy, entonces su opuesta también lo es]].
+39. [[./RetosLean4/Reto_39.lean][Las sucesiones antítonas y acotadas inferiormente son de Cauchy]].
