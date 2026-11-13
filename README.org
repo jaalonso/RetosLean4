@@ -41,3 +41,4 @@ Repositorio de ejercicios semanales de demostración en Lean 4.
 37. [[./RetosLean4/Reto_37.lean][Las sucesiones monótonas y acotadas superiormente son de Cauchy]].
 38. [[./RetosLean4/Reto_38.lean][Si una sucesión es de Cauchy, entonces su opuesta también lo es]].
 39. [[./RetosLean4/Reto_39.lean][Las sucesiones antítonas y acotadas inferiormente son de Cauchy]].
+40. [[./RetosLean4/Reto_40.lean][La sucesión 1/n es de Cauchy, pero no es monótona ni antítona]].
