@@ -93,8 +93,8 @@ variable (φ : ℕ → ℕ)
 -- ===============
 
 example
-  (hφ : ∀ n, φ n < φ (n + 1)) :
-  IsExtraction φ :=
+  (hφ : ∀ n, φ n < φ (n + 1))
+  : IsExtraction φ :=
 by
   intro i j hij
   -- i j : ℕ
