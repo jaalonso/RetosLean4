@@ -36,7 +36,7 @@ module
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- SeqLim, SeqConv, IsCauchy
+public import RetosLean4.Defs -- SeqLim, SeqConv, IsCauchy
 
 variable {u : ℕ → ℝ}
 
@@ -135,7 +135,7 @@ by
 -- 4ª demostración
 -- ===============
 
-example
+public theorem isCauchy_of_SeqConv
   (h : SeqConv u)
   : IsCauchy u :=
 by
