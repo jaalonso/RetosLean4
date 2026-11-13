@@ -33,7 +33,7 @@ def IsExtraction (φ : ℕ → ℕ) : Prop :=
   StrictMono φ
 
 -- v es una subsucesión de u.
-def Subseq (v u : ℕ → ℝ) : Prop :=
+def Subseq {X : Type*} [LE X] (v u : ℕ → X) : Prop :=
   ∃ φ, IsExtraction φ ∧ v = u ∘ φ
 
 -- a es una sucesión acotada superiormente.
