@@ -48,6 +48,6 @@ def SeqBddBelow {X : Type*} [LE X] (a : ℕ → X) : Prop :=
 def IsAPeak {X : Type*} [LinearOrder X] (a : ℕ → X) (n : ℕ) : Prop :=
   ∀ m > n, a m ≤ a n
 
--- los picos de la sucesión a no están acotados
+-- a tiene infinitos picos
 def UnBddPeaks {X : Type*} [LinearOrder X] (a : ℕ → X) : Prop :=
   ∀ k, ∃ n > k, IsAPeak a n
