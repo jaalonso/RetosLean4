@@ -6,7 +6,7 @@
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
--- Demostrar que si los picos de una sucesión no están acotados,
+-- Demostrar que si los picos de una sucesión están acotados,
 -- entonces tiene una subsucesión monótona.
 -- ---------------------------------------------------------------
 
