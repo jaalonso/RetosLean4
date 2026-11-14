@@ -1,5 +1,5 @@
 -- Reto_41.lean
--- Si los picos de una sucesión no están acotados, entonces tiene
+-- Si los picos de una sucesión están acotados, entonces tiene
 --   una subsucesión monótona.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 13-noviembre-2026
@@ -165,7 +165,7 @@ by
     -- ⊢ b n ≤ b (n + 1)
     have h1 : k < ρ^[n] (k+1) := by
       calc k
-           < σ n          := hσ n
+           < σ n         := hσ n
          _ = ρ^[n] (k+1) := σ_eq n
     calc b n
          = (a ∘ σ) n           := by rw [hb]
@@ -260,7 +260,7 @@ by
     have h1 : k < ρ^[n] (k+1) := by
       calc k
            < σ n          := hσ n
-         _ = ρ^[n] (k+1) := σ_eq n
+         _ = ρ^[n] (k+1)  := σ_eq n
     have h2 : ρ (ρ^[n] (k+1)) = τ (ρ^[n] (k+1)) :=
       ite_eq_right (not_le.mpr h1)
     calc b n
