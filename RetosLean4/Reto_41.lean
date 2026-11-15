@@ -14,15 +14,15 @@
 -- ================================
 
 -- Recordemos las definiciones:
---    + a(n) es un pico si, para todo m > n, a(m) ≤ a(n).
---    + a tiene infinitos picos si, para todo k, existe
---      un n > k tal que n es un pico.
+-- + a(n) es un pico si, para todo m > n, a(m) ≤ a(n).
+-- + a tiene infinitos picos si, para todo k, existe
+--   un n > k tal que n es un pico.
 --
 -- Supongamos que a no tiene infinitos picos. Hay que demostrar
 -- que existe una subsucesión creciente de a.
 --
 -- Como a no tiene infinitos picos, entonces existe un k tal
--- que ningún n > k es un pico. Es decir,
+-- que ningún n > k, a(n) es un pico. Es decir,
 --    ∀ n > k, ∃ m > n, a(n) < a(m).                            (1)
 --
 -- Por (1), se puede elegir para cada n > k un índice τ(n) tal
