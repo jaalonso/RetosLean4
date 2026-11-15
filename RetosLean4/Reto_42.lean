@@ -43,10 +43,10 @@
 -- + Caso n = 0. Se tiene
 --      σ(0) = τ¹(0)    [por (3)]
 --           = τ(0)     [por definición de τ¹]
---   que es un pico por (2).
+--   y a(τ(0)) es un pico por (2).
 -- + Caso n+1. Se tiene
 --      σ(n+1) = τ(σ(n))   [por (4)]
---   que es un pico por (2).
+--   y a(τ(σ(n))) es un pico por (2).
 --
 -- Veamos que, para todo n,
 --    σ(n) < σ(n+1).                                            (6)
