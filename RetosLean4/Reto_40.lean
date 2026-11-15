@@ -1,11 +1,11 @@
 -- Reto_40.lean
--- La sucesión 1/n es de Cauchy, pero no es monótona ni antítona.
+-- La sucesión 1/n es de Cauchy, pero no es creciente ni antítona.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 13-noviembre-2026
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
--- Demostrar que la sucesión 1/n es de Cauchy, pero no es monótona
+-- Demostrar que la sucesión 1/n es de Cauchy, pero no es creciente
 -- ni antítona (teniendo en cuenta que, en Lean, 1/0 = 0).
 -- ---------------------------------------------------------------
 
@@ -15,14 +15,14 @@
 -- Sea a la sucesión definida por a(n) = 1/n, para todo n ∈ ℕ.
 -- Hay que demostrar tres propiedades:
 --    (1) a es de Cauchy,
---    (2) a no es monótona,
+--    (2) a no es creciente,
 --    (3) a no es antítona.
 --
 -- Prueba de (1). Por el reto 1, la sucesión a converge a 0, luego
 -- es convergente. Por el reto 19, toda sucesión convergente es de
 -- Cauchy. Por tanto, a es de Cauchy.
 --
--- Prueba de (2). Para ver que a no es monótona basta ver que
+-- Prueba de (2). Para ver que a no es creciente basta ver que
 -- 1 ≤ 2 pero
 --    a(2) = 1/2 < 1 = 1/1 = a(1).
 --
