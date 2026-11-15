@@ -1,4 +1,4 @@
--- Reto_26.lean
+-- Reto_26.lean (Limite_cero_por_acotada.lean)
 -- Producto de una sucesión de límite cero por una acotada.
 -- Sevilla, 25-octubre-2026
 -- ---------------------------------------------------------------
@@ -12,11 +12,9 @@
 --    import Mathlib.Basic.Real.Basic
 --    import Mathlib.Tactic
 --
---    -- L es el límite de la sucesión a.
 --    def SeqLim (a : ℕ → ℝ) (L : ℝ) : Prop :=
 --      ∀ ε > 0, ∃ k : ℕ, ∀ n ≥ k, |a n - L| < ε
 --
---    -- La sucesión a está acotada.
 --    def SeqBdd (a : ℕ → ℝ) : Prop :=
 --      ∃ M > 0, ∀ n, |a n| ≤ M
 --
@@ -62,11 +60,9 @@ module
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
 
--- L es el límite de la sucesión a.
 def SeqLim (a : ℕ → ℝ) (L : ℝ) : Prop :=
   ∀ ε > 0, ∃ k : ℕ, ∀ n ≥ k, |a n - L| < ε
 
--- La sucesión a está acotada.
 def SeqBdd (a : ℕ → ℝ) : Prop :=
   ∃ M > 0, ∀ n, |a n| ≤ M
 
@@ -144,6 +140,43 @@ by
      _ = ε              := by field_simp
 
 -- 3ª demostración
+-- ===============
+
+example
+  (ha : SeqLim a 0)
+  (hb : SeqBdd b)
+  : SeqLim (a * b) 0 :=
+by
+  intro ε hε
+  -- ε : ℝ
+  -- hε : ε > 0
+  -- ⊢ ∃ k, ∀ n ≥ k, |(a * b) n - 0| < ε
+  obtain ⟨M, hM, hbM⟩ := hb
+  -- M : ℝ
+  -- hM : M > 0
+  -- hbM : ∀ (n : ℕ), |b n| ≤ M
+  obtain ⟨k, hk⟩ := ha (ε / M) (div_pos hε hM)
+  -- k : ℕ
+  -- hk : ∀ n ≥ k, |a n - 0| < ε / M
+  use k
+  -- ⊢ ∀ n ≥ k, |(a * b) n - 0| < ε
+  intro n hn
+  -- n : ℕ
+  -- hn : n ≥ k
+  -- ⊢ |(a * b) n - 0| < ε
+  have h1 : |a n| < ε / M := by
+    calc |a n|
+         = |a n - 0| := by rw [sub_zero]
+       _ < ε / M     := hk n hn
+  calc |(a * b) n - 0|
+       = |(a * b) n|    := by congr; exact sub_zero ((a * b) n)
+     _ = |a n * b n|    := by congr
+     _ = |a n| * |b n|  := abs_mul (a n) (b n)
+     _ ≤ |a n| * M      := by rel [hbM n]
+     _ < ε / M * M      := by rel [h1]
+     _ = ε              := div_mul_cancel₀ ε hM.ne'
+
+-- 4ª demostración
 -- ===============
 
 example
