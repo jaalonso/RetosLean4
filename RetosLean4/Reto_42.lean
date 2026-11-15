@@ -13,80 +13,68 @@
 -- Demostración en lenguaje natural
 -- ================================
 
+-- Demostración en lenguaje natural
+-- ================================
+
 -- Recordemos las definiciones:
 --    + a(n) es un pico si, para todo m > n, a(m) ≤ a(n).
 --    + a tiene infinitos picos si, para todo k, existe
 --      un n > k tal que n es un pico.
 --
--- Supongamos que a no tiene infinitos picos. Hay que demostrar
--- que existe una subsucesión creciente de a.
+-- Supongamos que a tiene infinitos picos. Hay que demostrar
+-- que existe una subsucesión decreciente de a.
 --
--- Como a no tiene infinitos picos, entonces existe un k tal
--- que ningún n > k es un pico. Es decir,
---    ∀ n > k, ∃ m > n, a(n) < a(m).                            (1)
+-- Como a tiene infinitos picos, para cada k se puede elegir un
+-- índice τ(k) tal que
+--    τ(k) > k                                                  (1)
+--    a(τ(k)) es un pico                                        (2)
 --
--- Por (1), se puede elegir para cada n > k un índice τ(n) tal
--- que
---    τ(n) > n                                                  (2)
---    a(n) < a(τ(n))                                            (3)
--- (Para n ≤ k, τ(n) no está determinado, pero no se va a usar.)
+-- Definimos la sucesión de índices σ por iteración de τ a
+-- partir de 0:
+--    σ(n) = τⁿ⁺¹(0).                                           (3)
 --
--- Definimos la función ρ que coincide con τ para n > k y que,
--- para n ≤ k, vale n + 1:
---    ρ(n) = n + 1   si n ≤ k,                                  (4)
---    ρ(n) = τ(n)    si n > k.                                  (5)
--- Entonces, por (2), (4) y (5), para todo n,
---    n < ρ(n).                                                 (6)
---
--- Definimos la sucesión de índices σ por iteración de ρ a
--- partir de k+1:
---    σ(n) = ρⁿ(k+1).                                           (7)
+-- De la definición de σ se obtiene que, para todo n,
+--    σ(n+1) = τⁿ⁺²(0)         [por (3)]
+--           = τ(τⁿ⁺¹(0))      [por definición de τⁿ⁺²]
+--           = τ(σ(n))         [por (3)]
+-- Luego,
+--    σ(n+1) = τ(σ(n)).                                         (4)
 --
 -- Veamos que, para todo n,
---    k < σ(n).                                                 (8)
--- Se demuestra por inducción sobre n.
+--    a(σ(n)) es un pico.                                       (5)
+-- Se demuestra por casos sobre n.
 -- + Caso n = 0. Se tiene
---      k < k + 1
---        = ρ⁰(k+1)    [por definición de ρ⁰]
---        = σ(0)        [por (7)]
---   Luego k < σ(0).
--- + Caso n+1. Por hipótesis de inducción,
---      k < σ(n).                                               (9)
---   Entonces,
---      k < σ(n)                 [por (9)]
---        < ρ(σ(n))             [por (6)]
---        = ρ(ρⁿ(k+1))         [por (7)]
---        = ρⁿ⁺¹(k+1)           [por definición de ρⁿ⁺¹]
---        = σ(n+1)               [por (7)]
---   Luego k < σ(n+1).
+--      σ(0) = τ¹(0)    [por (3)]
+--           = τ(0)     [por definición de τ¹]
+--   que es un pico por (2).
+-- + Caso n+1. Se tiene
+--      σ(n+1) = τ(σ(n))   [por (4)]
+--   que es un pico por (2).
+--
+-- Veamos que, para todo n,
+--    σ(n) < σ(n+1).                                            (6)
+-- En efecto,
+--    σ(n) < τ(σ(n))    [por (1)]
+--         = σ(n+1)     [por (4)]
+-- Por (6), como σ está definida sobre los naturales, σ es
+-- estrictamente creciente; es decir, σ es una extracción.
 --
 -- Definimos
---    b = a ∘ σ.                                               (10)
--- Veamos que b es una subsucesión de a y que es creciente.
+--    b = a ∘ σ.                                               (7)
+-- Veamos que b es una subsucesión de a y que es decreciente.
 --
--- b es una subsucesión de a. Por (6), (7) y el Reto 33 (que
--- afirma que la órbita de una función que crece más que la
--- identidad es una función de extracción) se tiene que σ es una
--- extracción. Además, como b = a ∘ σ, entonces b es una
--- subsucesión de a.
+-- b es una subsucesión de a. Como σ es una extracción y
+-- b = a ∘ σ, entonces b es una subsucesión de a.
 --
--- b es creciente. Como b está definida sobre los naturales, para
--- ver que es creciente basta demostrar que, para todo n,
---    b(n) ≤ b(n+1).
+-- b es decreciente. Como b está definida sobre los naturales, para
+-- ver que es decreciente basta demostrar que, para todo n,
+--    b(n+1) ≤ b(n).
 --
 -- Sea n ∈ ℕ. Entonces,
---    k < σ(n)          [por (8)]
---      = ρⁿ(k+1)      [por (7)]
--- Luego,
---    k < ρⁿ(k+1)                                              (11)
--- Entonces,
---    b(n) = a(σ(n))            [por (10)]
---         = a(ρⁿ(k+1))         [por (7)]
---         ≤ a(τ(ρⁿ(k+1)))      [por (3) y (11)]
---         = a(ρ(ρⁿ(k+1)))      [por (5) y (11)]
---         = a(ρⁿ⁺¹(k+1))       [por definición de ρⁿ⁺¹]
---         = a(σ(n+1))          [por (7)]
---         = b(n+1).            [por (10)]
+--    b(n+1) = a(σ(n+1))   [por (7)]
+--           = a(τ(σ(n)))  [por (4)]
+--           ≤ a(σ(n))     [por (5) y (1)]
+--           = b(n)        [por (7)]
 
 -- Demostraciones en Lean 4
 -- ========================
@@ -164,7 +152,6 @@ by
        _ ≤ a (σ n)         := σ_peak n (τ (σ n)) (τ_gt (σ n))
        _ = (a ∘ σ) n       := rfl
        _ = b n             := rfl
-
 
 -- 2ª demostración
 -- ===============
