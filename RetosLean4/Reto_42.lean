@@ -1,13 +1,13 @@
 -- Reto_42.lean
 -- Si los picos de una sucesión no están acotados, entonces tiene
---   una subsucesión antítona.
+--   una subsucesión decreciente.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 13-noviembre-2026
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
 -- Demostrar que si los picos de una sucesión no están acotados,
--- entonces tiene una subsucesión antítona.
+-- entonces tiene una subsucesión decreciente.
 -- ---------------------------------------------------------------
 
 -- Demostración en lenguaje natural
