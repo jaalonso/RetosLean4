@@ -15,9 +15,9 @@
 -- Sea a antítona y acotada inferiormente. Entonces existe un M
 -- tal que
 --    ∀ n, M ≤ a(n)                                              (1)
--- Consideremos la sucesión -a. Veamos que es monótona y acotada
+-- Consideremos la sucesión -a. Veamos que es creciente y acotada
 -- superiormente:
--- + Monótona: si m ≤ n, entonces a(n) ≤ a(m) por ser a antítona
+-- + Creciente: si m ≤ n, entonces a(n) ≤ a(m) por ser a antítona
 --   y, por tanto, -a(m) ≤ -a(n).
 -- + Acotada superiormente: por (1), -a(n) ≤ -M para todo n.
 --
