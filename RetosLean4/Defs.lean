@@ -44,7 +44,7 @@ def SeqBddAbove {X : Type*} [LE X] (a : ℕ → X) : Prop :=
 def SeqBddBelow {X : Type*} [LE X] (a : ℕ → X) : Prop :=
   ∃ M : X, ∀ n, M ≤ a n
 
--- n es un pico de la sucesión a
+-- a(n) es un pico de la sucesión a
 def IsAPeak {X : Type*} [LinearOrder X] (a : ℕ → X) (n : ℕ) : Prop :=
   ∀ m > n, a m ≤ a n
 
