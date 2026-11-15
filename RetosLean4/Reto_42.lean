@@ -1,8 +1,8 @@
 -- Reto_42.lean
--- Si una sucesión tiene infinitos picos, entonces tiene una subsucesión
---   decreciente.
+-- Si una sucesión tiene infinitos picos, entonces tiene
+--   una subsucesión  decreciente.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
--- Sevilla, 13-noviembre-2026
+-- Sevilla, 15-noviembre-2026
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
@@ -14,9 +14,9 @@
 -- ================================
 
 -- Recordemos las definiciones:
---    + a(n) es un pico si, para todo m > n, a(m) ≤ a(n).
---    + a tiene infinitos picos si, para todo k, existe
---      un n > k tal que a(n) es un pico.
+-- + a(n) es un pico si, para todo m > n, a(m) ≤ a(n).
+-- + a tiene infinitos picos si, para todo k, existe
+--   un n > k tal que a(n) es un pico.
 --
 -- Supongamos que a tiene infinitos picos. Hay que demostrar
 -- que existe una subsucesión decreciente de a.
@@ -80,7 +80,6 @@ module
 
 import Mathlib.Tactic
 import RetosLean4.Defs -- IsAPeak, HasInfinitePeaks, IsExtraction, Subseq
-import RetosLean4.Reto_33 -- isExtraction_of_Iterate
 
 variable {X : Type*} [LinearOrder X]
 variable {a : ℕ → X}
