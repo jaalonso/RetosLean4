@@ -19,7 +19,7 @@
 --      un n > k tal que n es un pico.
 --
 -- Supongamos que a no tiene infinitos picos. Hay que demostrar
--- que existe una subsucesión monótona de a.
+-- que existe una subsucesión creciente de a.
 --
 -- Como a no tiene infinitos picos, entonces existe un k tal
 -- que ningún n > k es un pico. Es decir,
@@ -62,7 +62,7 @@
 --
 -- Definimos
 --    b = a ∘ σ.                                               (10)
--- Veamos que b es una subsucesión de a y que es monótona.
+-- Veamos que b es una subsucesión de a y que es creciente.
 --
 -- b es una subsucesión de a. Por (6), (7) y el Reto 33 (que
 -- afirma que la órbita de una función que crece más que la
@@ -70,8 +70,8 @@
 -- extracción. Además, como b = a ∘ σ, entonces b es una
 -- subsucesión de a.
 --
--- b es monótona. Como b está definida sobre los naturales, para
--- ver que es monótona basta demostrar que, para todo n,
+-- b es creciente. Como b está definida sobre los naturales, para
+-- ver que es creciente basta demostrar que, para todo n,
 --    b(n) ≤ b(n+1).
 --
 -- Sea n ∈ ℕ. Entonces,
