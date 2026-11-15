@@ -13,13 +13,10 @@
 -- Demostración en lenguaje natural
 -- ================================
 
--- Demostración en lenguaje natural
--- ================================
-
 -- Recordemos las definiciones:
 --    + a(n) es un pico si, para todo m > n, a(m) ≤ a(n).
 --    + a tiene infinitos picos si, para todo k, existe
---      un n > k tal que n es un pico.
+--      un n > k tal que a(n) es un pico.
 --
 -- Supongamos que a tiene infinitos picos. Hay que demostrar
 -- que existe una subsucesión decreciente de a.
