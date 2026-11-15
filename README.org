@@ -43,3 +43,4 @@ Repositorio de ejercicios semanales de demostración en Lean 4.
 39. [[./RetosLean4/Reto_39.lean][Las sucesiones antítonas y acotadas inferiormente son de Cauchy]].
 40. [[./RetosLean4/Reto_40.lean][La sucesión 1/n es de Cauchy, pero no es monótona ni antítona]].
 41. [[./RetosLean4/Reto_41.lean][Si los picos de una sucesión están acotados, entonces tiene una subsucesión monótona]].
+42. [[./RetosLean4/Reto_41.lean/Reto_42.lean][Si una sucesión tiene infinitos picos, entonces tiene una subsucesión  decreciente]].
