@@ -1,25 +1,25 @@
 -- Reto_37.lean
--- Las sucesiones monótonas y acotadas superiormente son de Cauchy.
+-- Las sucesiones crecientes y acotadas superiormente son de Cauchy.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 6-noviembre-2026
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
--- Demostrar que kas sucesiones monótonas y acotadas superiormente
+-- Demostrar que kas sucesiones crecientes y acotadas superiormente
 -- son sucesiones de Cauchy.
 -- ---------------------------------------------------------------
 
 -- Demostración en lenguaje natural
 -- ================================
 
--- Sea a monótona y acotada superiormente. Lo demostraremos por
+-- Sea a creciente y acotada superiormente. Lo demostraremos por
 -- reducción al absurdo: supongamos que a no es de
 -- Cauchy y lleguemos a una contradicción.
 --
 -- Por estar a acotada superiormente, existe un M tal que
 --    ∀ n, a(n) ≤ M                                             (1)
 -- Por el lema del crecimiento lineal de los huecos de las
--- sucesiones monótonas que no son de Cauchy (del Reto 36),
+-- sucesiones crecientes que no son de Cauchy (del Reto 36),
 -- existen ε y σ tales que
 --    0 < ε
 --    ∀ k, k · ε ≤ a(σᵏ(0)) - a(0)                              (2)
