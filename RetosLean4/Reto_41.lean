@@ -14,7 +14,7 @@
 -- ================================
 
 -- Recordemos las definiciones:
---    + n es un pico si, para todo m > n, a(m) ≤ a(n).
+--    + a(n) es un pico si, para todo m > n, a(m) ≤ a(n).
 --    + a tiene infinitos picos si, para todo k, existe
 --      un n > k tal que n es un pico.
 --
