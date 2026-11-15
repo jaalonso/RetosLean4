@@ -1,23 +1,23 @@
 -- Reto_39.lean
--- Las sucesiones antítonas y acotadas inferiormente son de Cauchy.
+-- Las sucesiones decrecientes y acotadas inferiormente son de Cauchy.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 12-noviembre-2026
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
--- Demostrar que las sucesiones antítonas y acotadas inferiormente
+-- Demostrar que las sucesiones decrecientes y acotadas inferiormente
 -- son sucesiones de Cauchy.
 -- ---------------------------------------------------------------
 
 -- Demostración en lenguaje natural
 -- ================================
 
--- Sea a antítona y acotada inferiormente. Entonces existe un M
+-- Sea a decreciente y acotada inferiormente. Entonces existe un M
 -- tal que
 --    ∀ n, M ≤ a(n)                                              (1)
 -- Consideremos la sucesión -a. Veamos que es creciente y acotada
 -- superiormente:
--- + Creciente: si m ≤ n, entonces a(n) ≤ a(m) por ser a antítona
+-- + Creciente: si m ≤ n, entonces a(n) ≤ a(m) por ser a decreciente
 --   y, por tanto, -a(m) ≤ -a(n).
 -- + Acotada superiormente: por (1), -a(n) ≤ -M para todo n.
 --
