@@ -1,4 +1,4 @@
--- Reto_26.lean (Limite_cero_por_acotada.lean)
+-- Reto_26.lean
 -- Producto de una sucesión de límite cero por una acotada.
 -- Sevilla, 25-octubre-2026
 -- ---------------------------------------------------------------

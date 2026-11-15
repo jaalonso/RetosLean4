@@ -38,11 +38,11 @@
 -- Demostraciones en Lean 4
 -- ========================
 
-module
-
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
-import RetosLean4.Defs -- SeqLim
+
+def SeqLim (a : ℕ → ℝ) (L : ℝ) : Prop :=
+  ∀ ε > 0, ∃ k : ℕ, ∀ n ≥ k, |a n - L| < ε
 
 variable {a : ℕ → ℝ}
 variable {L M : ℝ}
