@@ -1,12 +1,12 @@
 -- Reto_41.lean
--- Si los picos de una sucesión están acotados, entonces tiene
+-- Si una sucesión no tiene infinitos picos, entonces tiene
 --   una subsucesión creciente.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 13-noviembre-2026
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
--- Demostrar que si los picos de una sucesión están acotados,
+-- Demostrar que si una sucesión no tiene infinitos picos,
 -- entonces tiene una subsucesión creciente.
 -- ---------------------------------------------------------------
 
