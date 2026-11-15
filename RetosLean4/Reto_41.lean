@@ -94,7 +94,7 @@
 module
 
 import Mathlib.Tactic
-import RetosLean4.Defs -- IsAPeak, UnBddPeaks, IsExtraction, Subseq
+import RetosLean4.Defs -- IsAPeak, HasInfinitePeaks, IsExtraction, Subseq
 import RetosLean4.Reto_33 -- isExtraction_of_Iterate
 
 variable {X : Type*} [LinearOrder X]
@@ -104,10 +104,10 @@ variable {a : ℕ → X}
 -- ===============
 
 example
-  (ha : ¬ UnBddPeaks a)
+  (ha : ¬ HasInfinitePeaks a)
   : ∃ b, Subseq b a ∧ Monotone b :=
 by
-  unfold UnBddPeaks at ha
+  unfold HasInfinitePeaks at ha
   -- ha : ¬∀ (k : ℕ), ∃ n > k, IsAPeak a n
   push Not at ha
   -- ha : ∃ k, ∀ n > k, ¬IsAPeak a n
@@ -182,10 +182,10 @@ by
 -- ===============
 
 lemma MonotoneSubseq_of_BddPeaks
-  (ha : ¬ UnBddPeaks a)
+  (ha : ¬ HasInfinitePeaks a)
   : ∃ b, Subseq b a ∧ Monotone b :=
 by
-  unfold UnBddPeaks at ha
+  unfold HasInfinitePeaks at ha
   -- ha : ¬∀ (k : ℕ), ∃ n > k, IsAPeak a n
   push Not at ha
   -- ha : ∃ k, ∀ n > k, ¬IsAPeak a n
