@@ -1,11 +1,11 @@
 -- Reto_36.lean
--- Crecimiento de los huecos de las sucesiones monótonas que no son de Cauchy.
+-- Crecimiento de los huecos de las sucesiones crecientes que no son de Cauchy.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 6-noviembre-2026
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
--- Demostrar que si a es una sucesión monótona que no es de Cauchy,
+-- Demostrar que si a es una sucesión creciente que no es de Cauchy,
 -- entonces existen ε > 0 y σ : ℕ → ℕ tales que, para todo k ∈ ℕ,
 --    k · ε ≤ a(σᵏ(0)) - a(0),
 -- donde σᵏ denota la k-ésima iterada de σ.
@@ -14,7 +14,7 @@
 -- Demostraciones en lenguaje natural
 -- ==================================
 
--- Sea a monótona y que no es de Cauchy. Por el lema del Reto 35,
+-- Sea a creciente y que no es de Cauchy. Por el lema del Reto 35,
 -- existe un ε tal que
 --    ε > 0                                                    (1)
 --    ∀ N, ∃ n ≥ N, ∃ m ≥ n, ε ≤ |a(m) - a(n)|
@@ -51,11 +51,11 @@
 --    ≤ (a(m) - a(0)) + |a(σ(m)) - a(τ(m))|
 --        [por HI y (4)]
 --    = (a(m) - a(0)) + (a(σ(m)) - a(τ(m)))
---        [por (3) y por ser a monótona]
+--        [por (3) y por ser a creciente]
 --    = (a(m) - a(τ(m))) + (a(σ(m)) - a(0))
 --        [por álgebra]
 --    ≤ 0 + (a(σ(m)) - a(0))
---        [por (2) y por ser a monótona]
+--        [por (2) y por ser a creciente]
 --    = a(σ(m)) - a(0)
 --        [por álgebra]
 --    = a(σᵏ⁺¹(0)) - a(0)
