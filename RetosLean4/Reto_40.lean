@@ -1,12 +1,12 @@
 -- Reto_40.lean
--- La sucesión 1/n es de Cauchy, pero no es creciente ni antítona.
+-- La sucesión 1/n es de Cauchy, pero no es creciente ni decreciente.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 13-noviembre-2026
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
 -- Demostrar que la sucesión 1/n es de Cauchy, pero no es creciente
--- ni antítona (teniendo en cuenta que, en Lean, 1/0 = 0).
+-- ni decreciente (teniendo en cuenta que, en Lean, 1/0 = 0).
 -- ---------------------------------------------------------------
 
 -- Demostración en lenguaje natural
@@ -16,7 +16,7 @@
 -- Hay que demostrar tres propiedades:
 --    (1) a es de Cauchy,
 --    (2) a no es creciente,
---    (3) a no es antítona.
+--    (3) a no es decreciente.
 --
 -- Prueba de (1). Por el reto 1, la sucesión a converge a 0, luego
 -- es convergente. Por el reto 19, toda sucesión convergente es de
@@ -26,7 +26,7 @@
 -- 1 ≤ 2 pero
 --    a(2) = 1/2 < 1 = 1/1 = a(1).
 --
--- Prueba de (3). Para ver que a no es antítona basta ver que
+-- Prueba de (3). Para ver que a no es decreciente basta ver que
 -- 0 ≤ 1 pero
 --    a(0) = 1/0 = 0 < 1 = 1/1 = a(1)
 -- (en donde hemos usado que, en Lean, la división por cero está
