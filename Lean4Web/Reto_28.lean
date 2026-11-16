@@ -1,8 +1,8 @@
--- Reto_28_Sucesion_identidad_no_acotada.lean
+-- Reto_28.lean
 -- La sucesión aₙ = n no está acotada.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
--- Sevilla, 26-octubre-2026
--- ---------------------------------------------------------------
+-- Sevilla, 17-noviembre-2026
+-- ---------------------------------------------------------------------
 
 -- ---------------------------------------------------------------
 -- Demostrar que la sucesión aₙ = n no está acotada.
@@ -61,6 +61,8 @@
 
 -- Demostraciones en Lean 4
 -- ========================
+
+module
 
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
