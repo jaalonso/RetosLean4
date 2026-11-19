@@ -14,9 +14,10 @@
 
 -- La demostración se basa en los siguientes lemas:
 -- + Lema 1: Si aₙ es de Cauchy, entonces existe un k ∈ ℕ tal
---   que para todo n ≥ k, |a n| < |a k| + 1.
--- + Lema 2: Para cada k ∈ ℕ, existe un M ∈ ℝ tal que para
---   todo i < k, |a i| ≤ M.
+--   que
+--      ∀ n ≥ k, |a n| < |a k| + 1.
+-- + Lema 2: Para cada k ∈ ℕ, existe un M ∈ ℝ tal que
+--      ∀ i < k, |a i| ≤ M.
 --
 -- En efecto, por el lema 1, existe un k ∈ ℕ tal que
 --   ∀ n ≥ k, |aₙ| < |aₖ| + 1                                  (1)
@@ -44,7 +45,7 @@
 -- Falta la demostración de los lemas. Para demostrar el
 -- primer lema, puesto que aₙ es de Cauchy, existe un k ∈ ℕ tal
 -- que
---    ∀ i ≥ k, ∀ j ≥ k, |aᵢ - aⱼ| < 1                         (4)
+--    ∀ i ≥ k, ∀ j ≥ i, |aᵢ - aⱼ| < 1                         (4)
 -- Veamos que k cumple la condición; es decir,
 --    ∀ n ≥ k, |aₙ| < |aₖ| + 1
 -- Para ello, sea n ∈ ℕ tal que
@@ -75,11 +76,13 @@
 -- Demostraciones en Lean 4
 -- ========================
 
+module
+
 import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
 
 def IsCauchy (a : ℕ → ℝ) : Prop :=
-  ∀ ε > 0, ∃ N : ℕ, ∀ p ≥ N, ∀ q ≥ N, |a p - a q| < ε
+  ∀ (ε : ℝ), 0 < ε → ∃ N : ℕ, ∀ n ≥ N, ∀ m ≥ N, |a m - a n| < ε
 
 def SeqBdd (a : ℕ → ℝ) : Prop :=
   ∃ M > 0, ∀ n, |a n| ≤ M
@@ -94,14 +97,14 @@ lemma cauchy_exists_bound_tail_terms
 by
   obtain ⟨k, hk⟩ := h 1 one_pos
   -- k : ℕ
-  -- hk : ∀ p ≥ k, ∀ q ≥ k, |a p - a q| < 1
+  -- hk : ∀ n ≥ k, ∀ m ≥ n, |a m - a n| < 1
   use k
   -- ⊢ ∀ n ≥ k, |a n| < |a k| + 1
   intro n hn
   -- n : ℕ
   -- hn : n ≥ k
   -- ⊢ |a n| < |a k| + 1
-  have h1 : |a n - a k| < 1 := hk n hn k (Nat.le_refl k)
+  have h1 : |a n - a k| < 1 := hk k (le_refl k) n hn
   calc |a n|
        = |a k + (a n - a k)| := congrArg abs (add_sub_cancel (a k) (a n)).symm
      _ ≤ |a k| + |a n - a k| := abs_add_le (a k) (a n - a k)
@@ -126,7 +129,6 @@ by
   -- C : ℝ
   -- hC : ∀ i < k, |a i| ≤ C
   set M := max (|a k| + 1) C
-  -- hM : M = max (|a k| + 1) C
   use M
   -- ⊢ M > 0 ∧ ∀ (n : ℕ), |a n| ≤ M
   constructor
@@ -148,25 +150,3 @@ by
       calc |a n|
            ≤ |a k| + 1 := le_of_lt (hk n hn2)
          _ ≤ M         := le_max_left (|a k| + 1) _
-
--- Lemas usados
--- ============
-
--- variable (b c d : ℝ)
--- variable (m n : ℕ)
--- variable (s : Finset ℕ)
--- variable (f : ℕ → ℝ)
--- #check (abs_add_le b c : |b + c| ≤ |b| + |c|)
--- #check (abs_nonneg b : 0 ≤ |b|)
--- #check (add_le_add_left : b ≤ c → ∀ d, b + d ≤ c + d)
--- #check (add_lt_add_right : b < c → ∀ d, d + b < d + c)
--- #check (add_sub_cancel b c : b + (c - b) = c)
--- #check (le_max_left b c : b ≤ max b c)
--- #check (le_max_right b c : c ≤ max b c)
--- #check (lt_or_ge m n : m < n ∨ n ≤ m)
--- #check (mem_range : m ∈ range n ↔ m < n)
--- #check (Nat.le_refl n : n ≤ n)
--- #check (one_pos : 0 < 1)
--- #check (Real.zero_lt_one : (0 : ℝ) < 1)
--- #check (single_le_sum : (∀ i ∈ s, 0 ≤ a i) → ∀ i : ℕ, i ∈ s → a i ≤ ∑ x ∈ s, a x)
--- #check (zero_add b : 0 + b = b)
