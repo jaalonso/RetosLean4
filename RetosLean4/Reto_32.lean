@@ -5,9 +5,12 @@
 -- ---------------------------------------------------------------
 
 -- ---------------------------------------------------------------
--- Una función φ : ℕ → ℕ es una función de extracción si es
--- estrictamente creciente; es decir, si
---    ∀ i j ∈ ℕ, i < j → φ(i) < φ(j)
+-- Una subsucesión se obtiene aplicando a la sucesión original una
+-- función de extracción; es decir, una función φ : ℕ → ℕ
+-- estrictamente creciente. Por ejemplo, la subsucesión
+--    u₀, u₂, u₄, u₆, ...
+-- se obtiene con la función de extracción φ definida por
+-- φ(n) = 2n.
 --
 -- Demostrar que si
 --    ∀ n, φ(n) < φ (n+1),
