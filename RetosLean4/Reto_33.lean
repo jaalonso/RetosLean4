@@ -1,5 +1,5 @@
 -- Reto_33.lean
--- La órbita de una función que crece más que la identidad es una extracción.
+-- La órbita de una función que supera la identidad es una extracción,
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 3-noviembre-2026
 -- ---------------------------------------------------------------
@@ -41,7 +41,7 @@
 --
 -- Sea n ∈ ℕ. Entonces,
 --    φⁿ(n₀) < φ(φⁿ(n₀))   [por la hipótesis, aplicada a φⁿ(n₀)]
---           = φⁿ⁺¹(n₀)    [por definición de iterada]
+--           = φⁿ⁺¹(n₀)    [por la propiedad de las iteradas]
 -- que es (1).
 
 -- Demostraciones en Lean 4
