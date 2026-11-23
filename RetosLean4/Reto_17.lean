@@ -393,8 +393,8 @@ lemma Challenge17_L2
 -- ============================
 
 public theorem seqBdd_of_seqConv
-  (ha : SeqConv a) :
-  SeqBdd a :=
+  (ha : SeqConv a)
+  : SeqBdd a :=
 by
   obtain ⟨L, hL⟩ := ha
   -- L : ℝ
