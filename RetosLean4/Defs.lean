@@ -17,7 +17,7 @@ def SeqConv (a : ℕ → ℝ) : Prop :=
   ∃ L, SeqLim a L
 
 -- La sucesión a está acotada.
-def SeqBdd (a : ℕ → ℝ) : Prop :=
+def SeqBdd {X : Type*} [Ring X] [LinearOrder X] [IsStrictOrderedRing X] (a : ℕ → X) : Prop :=
   ∃ M > 0, ∀ n, |a n| ≤ M
 
 -- M es una cota superior de la sucesión a.
