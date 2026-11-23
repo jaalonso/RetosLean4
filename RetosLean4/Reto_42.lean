@@ -1,6 +1,6 @@
 -- Reto_42.lean
 -- Si una sucesión tiene infinitos picos, entonces tiene
---   una subsucesión  decreciente.
+--   una subsucesión decreciente.
 -- José A. Alonso Jiménez <https://jaalonso.github.io>
 -- Sevilla, 15-noviembre-2026
 -- ---------------------------------------------------------------
