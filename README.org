@@ -44,3 +44,4 @@ Repositorio de ejercicios semanales de demostración en Lean 4.
 40. [[./RetosLean4/Reto_40.lean][La sucesión 1/n es de Cauchy, pero no es monótona ni antítona]].
 41. [[./RetosLean4/Reto_41.lean][Si una sucesión no tiene infinitos picos, entonces tiene una subsucesión creciente]].
 42. [[./RetosLean4/Reto_42.lean][Si una sucesión tiene infinitos picos, entonces tiene una subsucesión decreciente]].
+43. [[./RetosLean4/Reto_43.lean][Teorema de Bolzano-Weierstrass]].

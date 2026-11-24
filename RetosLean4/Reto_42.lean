@@ -79,7 +79,7 @@
 module
 
 import Mathlib.Tactic
-import RetosLean4.Defs -- IsAPeak, HasInfinitePeaks, IsExtraction, Subseq
+public import RetosLean4.Defs -- IsAPeak, HasInfinitePeaks, IsExtraction, Subseq
 
 variable {X : Type*} [LinearOrder X]
 variable {a : ℕ → X}
@@ -152,7 +152,7 @@ by
 -- 2ª demostración
 -- ===============
 
-example
+public theorem AntitoneSubseq_of_HasInfinitePeaks
   (ha : HasInfinitePeaks a)
   : ∃ b, Subseq b a ∧ Antitone b :=
 by

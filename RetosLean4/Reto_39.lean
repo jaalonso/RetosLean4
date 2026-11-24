@@ -30,8 +30,8 @@
 module
 
 import Mathlib.Tactic
-import RetosLean4.Defs -- IsCauchy, SeqBddBelow
-import RetosLean4.Reto_37 -- isCauchy_of_mono_bddAbove
+public import RetosLean4.Defs -- IsCauchy, SeqBddBelow
+import RetosLean4.Reto_37 -- IsCauchy_of_Monotone_of_SeqBddAbove
 import RetosLean4.Reto_38 -- isCauchy_neg
 
 variable {X : Type*} [Field X]
@@ -57,14 +57,14 @@ by
     -- n : ℕ
     -- ⊢ (-a) n ≤ -M
     simpa using hM n
-  have hb3 : IsCauchy (-a) := isCauchy_of_mono_bddAbove hb1 hb2
+  have hb3 : IsCauchy (-a) := IsCauchy_of_Monotone_of_SeqBddAbove hb1 hb2
   have hb4 : IsCauchy (-(-a)) := isCauchy_neg hb3
   simpa using hb4
 
 -- 2ª demostración
 -- ===============
 
-example
+public theorem IsCauchy_of_Antitone_of_SeqBddBelow
   (ha1 : Antitone a)
   (ha2 : SeqBddBelow a)
   : IsCauchy a :=
@@ -89,7 +89,7 @@ by
     calc (-a) n
          = -(a n) := rfl
        _ ≤ -M     := neg_le_neg_iff.mpr (hM n)
-  have hb3 : IsCauchy (-a) := isCauchy_of_mono_bddAbove hb1 hb2
+  have hb3 : IsCauchy (-a) := IsCauchy_of_Monotone_of_SeqBddAbove hb1 hb2
   have hb4 : IsCauchy (-(-a)) := isCauchy_neg hb3
   have h5 : (-(-a)) = a := neg_neg a
   rw [h5] at hb4

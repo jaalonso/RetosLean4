@@ -48,16 +48,16 @@
 -- + Caso n = 0. Se tiene
 --      k < k + 1
 --        = ρ⁰(k+1)    [por definición de ρ⁰]
---        = σ(0)        [por (7)]
+--        = σ(0)       [por (7)]
 --   Luego k < σ(0).
 -- + Caso n+1. Por hipótesis de inducción,
 --      k < σ(n).                                               (9)
 --   Entonces,
---      k < σ(n)                 [por (9)]
---        < ρ(σ(n))             [por (6)]
---        = ρ(ρⁿ(k+1))         [por (7)]
---        = ρⁿ⁺¹(k+1)           [por definición de ρⁿ⁺¹]
---        = σ(n+1)               [por (7)]
+--      k < σ(n)        [por (9)]
+--        < ρ(σ(n))     [por (6)]
+--        = ρ(ρⁿ(k+1))  [por (7)]
+--        = ρⁿ⁺¹(k+1)   [por definición de ρⁿ⁺¹]
+--        = σ(n+1)      [por (7)]
 --   Luego k < σ(n+1).
 --
 -- Definimos
@@ -75,18 +75,18 @@
 --    b(n) ≤ b(n+1).
 --
 -- Sea n ∈ ℕ. Entonces,
---    k < σ(n)          [por (8)]
+--    k < σ(n)         [por (8)]
 --      = ρⁿ(k+1)      [por (7)]
 -- Luego,
 --    k < ρⁿ(k+1)                                              (11)
 -- Entonces,
---    b(n) = a(σ(n))            [por (10)]
---         = a(ρⁿ(k+1))        [por (7)]
---         ≤ a(τ(ρⁿ(k+1)))     [por (3) y (11)]
+--    b(n) = a(σ(n))          [por (10)]
+--         = a(ρⁿ(k+1))       [por (7)]
+--         ≤ a(τ(ρⁿ(k+1)))    [por (3) y (11)]
 --         = a(ρ(ρⁿ(k+1)))    [por (5) y (11)]
---         = a(ρⁿ⁺¹(k+1))      [por definición de ρⁿ⁺¹]
---         = a(σ(n+1))          [por (7)]
---         = b(n+1).            [por (10)]
+--         = a(ρⁿ⁺¹(k+1))     [por definición de ρⁿ⁺¹]
+--         = a(σ(n+1))        [por (7)]
+--         = b(n+1).          [por (10)]
 
 -- Demostraciones en Lean 4
 -- ========================
@@ -94,7 +94,7 @@
 module
 
 import Mathlib.Tactic
-import RetosLean4.Defs -- IsAPeak, HasInfinitePeaks, IsExtraction, Subseq
+public import RetosLean4.Defs -- IsAPeak, HasInfinitePeaks, IsExtraction, Subseq
 import RetosLean4.Reto_33 -- isExtraction_of_Iterate
 
 variable {X : Type*} [LinearOrder X]
@@ -181,7 +181,7 @@ by
 -- 2ª demostración
 -- ===============
 
-lemma MonotoneSubseq_of_BddPeaks
+public theorem MonotoneSubseq_of_NotHasInfinitePeaks
   (ha : ¬ HasInfinitePeaks a)
   : ∃ b, Subseq b a ∧ Monotone b :=
 by

@@ -123,7 +123,7 @@ by
 -- 3ª demostración
 -- ===============
 
-public theorem isCauchy_of_mono_bddAbove
+public theorem IsCauchy_of_Monotone_of_SeqBddAbove
   (h1 : Monotone a)
   (h2 : SeqBddAbove a)
   : IsCauchy a :=
